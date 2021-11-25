@@ -1,0 +1,29 @@
+﻿@using MiPrimeraAplicacionEnNetCore.Clases;
+@model IEnumerable<InstructorCLS>;
+
+@{
+    ViewData["Title"] = "PruebaLista";
+}
+
+<h1>PruebaLista</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Paterno</th>
+            <th>Materno</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (InstructorCLS oInstructor in Model)
+        {
+            <tr>
+                <td>@oInstructor.nombre</td>
+                <td>@oInstructor.paterno</td>
+                <td>@oInstructor.materno</td>
+            </tr>
+        }
+
+    </tbody>
+</table>

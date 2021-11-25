@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MiPrimeraAplicacionEnNetCore.Clases.SedeCLS>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index Sede</h1>
+
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.iidSede)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombreSede)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.direccion)
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.iidSede)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombreSede)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.direccion)
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>

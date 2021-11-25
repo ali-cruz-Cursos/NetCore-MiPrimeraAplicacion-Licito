@@ -1,0 +1,32 @@
+﻿@using MiPrimeraAplicacionEnNetCore.Clases;
+@model IEnumerable<PersonaCLS>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index Persona</h1>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(model=>model.iidPersona)</th>
+            <th>@Html.DisplayNameFor(model=>model.nombreCompleto)</th>
+            <th>@Html.DisplayNameFor(model=>model.email)</th>
+            <th>@Html.DisplayNameFor(model=>model.nombreSexo)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (PersonaCLS oPersonaCLS in Model)
+            {
+                <tr>
+                    <td>@oPersonaCLS.iidPersona</td>
+                    <td>@oPersonaCLS.nombreCompleto</td>
+                    <td>@oPersonaCLS.email</td>
+                    <td>@oPersonaCLS.nombreSexo</td>
+                </tr>
+            }
+
+    </tbody>
+</table>
+

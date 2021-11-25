@@ -19,6 +19,25 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
             return View();
         }
 
+        public IActionResult PruebaLista()
+        {
+            List<InstructorCLS> lista = new List<InstructorCLS>();
+
+            InstructorCLS oInstructorCLS = new InstructorCLS();
+            oInstructorCLS.nombre = "Ali";
+            oInstructorCLS.paterno = "Cruz";
+            oInstructorCLS.materno = "Monter";
+            lista.Add(oInstructorCLS);
+
+            oInstructorCLS = new InstructorCLS();
+            oInstructorCLS.nombre = "Sara";
+            oInstructorCLS.paterno = "Cruz";
+            oInstructorCLS.materno = "D";
+            lista.Add(oInstructorCLS);
+
+            return View(lista);
+        }
+
         public string bienvenido()
         {
             return "Bienvenido al curso";

@@ -1,0 +1,29 @@
+﻿@using MiPrimeraAplicacionEnNetCore.Clases;
+@model IEnumerable<EspecialidadCLS>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(model=>model.iidEspecialidad)</th>
+            <th>@Html.DisplayNameFor(model=>model.nombre)</th>
+            <th>@Html.DisplayNameFor(model=>model.descripcion)</th>
+        </tr>
+    </thead>
+    <dbody>
+        @foreach (EspecialidadCLS oEspecialidad in Model)
+            {
+                <tr>
+                    <td>@oEspecialidad.iidEspecialidad</td>
+                    <td>@oEspecialidad.nombre</td>
+                    <td>@oEspecialidad.descripcion</td>
+                </tr>
+            }
+    </dbody>
+
+</table>
