@@ -33,10 +33,21 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
             return View();
         }
 
-        public IActionResult MiPagina2()
+        public int numero()
         {
-            return View();
+            return 10;
         }
+
+        public string saludo()
+        {
+            return "Hola amigos";
+        }
+
+        public double sueldo()
+        {
+            return 100.5;
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

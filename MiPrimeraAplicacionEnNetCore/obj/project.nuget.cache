@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ex7w90rL7n35+GNXJCx7NTQhDz89YZahF2WqAjxFGJFzBOpF4qWr+ITKJGOGL3ji+1jv2gBtHpeoeknPMhDgdQ==",
+  "dgSpecHash": "bbXZmamihpTPqz6Z0XvoR7yGbVG7vJocjovikv7QmzOiEhdMooCpqGrOVeQri+tybgSuwe5xniYYaXPFD+UtgA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\userone\\source\\repos\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj",
+  "projectFilePath": "C:\\Users\\userone\\Desktop\\Proyectos\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\userone\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",
     "C:\\Users\\userone\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

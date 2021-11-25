@@ -46,7 +46,7 @@ namespace MiPrimeraAplicacionEnNetCore
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Pais}/{action=Lista}/{id?}");
             });
         }
     }
