@@ -1278,3 +1278,6 @@ C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicac
 C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\Razor\Views\Pais\PruebaLista.cshtml.g.cs
 C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\Razor\Views\Persona\Index.cshtml.g.cs
 C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\Razor\Views\Sede\Index.cshtml.g.cs
+C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\MiPrimeraAplicacionEnNetCore.csproj.AssemblyReference.cache
+C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\Razor\Views\Pagina\Index.cshtml.g.cs
+C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\Razor\Views\Medicamento\Index.cshtml.g.cs

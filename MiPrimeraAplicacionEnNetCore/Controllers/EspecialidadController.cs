@@ -12,6 +12,9 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.mensaje = "Mensaje desde el controlador hacia la vista";
+
+
             List<EspecialidadCLS> listaEspecialidad = new List<EspecialidadCLS>();
 
             using(BDHospitalContext bd = new BDHospitalContext())

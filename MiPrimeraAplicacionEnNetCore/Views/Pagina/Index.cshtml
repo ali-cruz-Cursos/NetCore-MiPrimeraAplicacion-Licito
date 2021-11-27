@@ -1,0 +1,32 @@
+﻿
+@{
+    @using MiPrimeraAplicacionEnNetCore.Clases;
+    @model IEnumerable<PaginaCLS>
+
+    ViewData["Title"] = "Index";
+}
+
+<h1>Paginas</h1>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.idPagina)</th>
+            <th>@Html.DisplayNameFor(model => model.mensaje)</th>
+            <th>@Html.DisplayNameFor(model => model.accion)</th>
+            <th>@Html.DisplayNameFor(model => model.controlador)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (PaginaCLS oPaginaCLS in Model)
+            {
+                <tr>
+                    <td>@oPaginaCLS.idPagina</td>
+                    <td>@oPaginaCLS.mensaje</td>
+                    <td>@oPaginaCLS.accion</td>
+                    <td>@oPaginaCLS.controlador</td>
+                </tr>
+            }
+    </tbody>
+</table>
+

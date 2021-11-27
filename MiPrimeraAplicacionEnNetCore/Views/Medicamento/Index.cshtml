@@ -1,0 +1,36 @@
+﻿
+@{
+    @using MiPrimeraAplicacionEnNetCore.Clases
+    @model IEnumerable<MedicamentoCLS>
+
+    ViewData["Title"] = "Index";
+}
+
+<h1>Medicamento</h1>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.idMedicamento)</th>
+            <th>@Html.DisplayNameFor(model => model.nombre)</th>
+            <th>@Html.DisplayNameFor(model => model.precio)</th>
+            <th>@Html.DisplayNameFor(model => model.stock)</th>
+            <th>@Html.DisplayNameFor(model => model.formaFarmaceutica)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (MedicamentoCLS oMedicamento in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => oMedicamento.idMedicamento)</td>
+                    <td>@Html.DisplayFor(modelItem => oMedicamento.nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => oMedicamento.precio)</td>
+                    <td>@Html.DisplayFor(modelItem => oMedicamento.stock)</td>
+                    <td>@Html.DisplayFor(modelItem => oMedicamento.formaFarmaceutica)</td>
+                </tr>
+            }
+            
+    </tbody>
+
+</table>
+
