@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MiPrimeraAplicacionEnNetCore.Clases.TipoUsuarioCLS>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Tipo Usuarios</h1>
+
+<form asp-controller="TipoUsuario" asp-action="Index">
+    <input type="submit" class="btn btn-primary" value="Enviar" />
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.idTipoUsuario)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.descripcion)
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    @if (ViewBag.Id == 0)
+                    {
+                        <input type="number" name="idTipoUsuario" class="form form-control" />
+                    }
+                    else
+                    {
+                        <input type="number" value="@ViewBag.Id" name="idTipoUsuario" class="form form-control" />
+                    }
+
+                </th>
+                <th>
+                    <input type="text" value="@ViewBag.Nombre" name="nombre" class="form form-control" />
+                </th>
+                <th>
+                    <input type="text" value="@ViewBag.Descripcion" name="descripcion" class="form form-control" />
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.idTipoUsuario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.descripcion)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

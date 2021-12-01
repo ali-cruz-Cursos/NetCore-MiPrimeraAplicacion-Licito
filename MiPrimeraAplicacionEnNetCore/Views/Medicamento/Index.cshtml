@@ -4,9 +4,15 @@
     @model IEnumerable<MedicamentoCLS>
 
     ViewData["Title"] = "Index";
+    List<SelectListItem> listaFormas = ViewBag.listaFormasFarmaceuticas;
 }
 
 <h1>Medicamento</h1>
+
+<form style="display: grid; grid-template-columns: 1fr 2fr"class="mb-2" id="formMedicamento">
+    <label>Ingresa la forma</label>
+    @Html.DropDownList("idFormaFarmaceutica", listaFormas, new { @class="form form-control"} )
+</form>
 
 <table class="table">
     <thead class="thead-dark">
@@ -31,6 +37,11 @@
             }
             
     </tbody>
-
 </table>
 
+<script>
+    var idFormaFarmaceutica = document.getElementById("idFormaFarmaceutica");
+    idFormaFarmaceutica.onchange = function () {
+        document.getElementById("formMedicamento").submit();
+    }
+</script>

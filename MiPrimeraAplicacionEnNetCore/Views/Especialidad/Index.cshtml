@@ -8,6 +8,14 @@
 
 
 <h1>@ViewBag.mensaje</h1>
+
+<form asp-controller="Especialidad" asp-action="Index" method="post" class="mb-2"
+      style="display: grid; grid-template-columns: 1fr 2fr 1fr 1fr" id="frmEspecialidad">
+    <label>Ingrese nombre especialidad</label>
+    <input type="text" id="nombre" class="form form-control" name="nombre" value="@ViewBag.nombreEspecialidad"/>
+    <input type="submit" value="Buscar" class="btn btn-info" />
+    <input type="button" value="Limpiar" class="btn btn-danger" onclick="Limpiar()" />
+</form>
 <table class="table">
     <thead class="thead-dark">
         <tr>
@@ -28,3 +36,11 @@
     </dbody>
 
 </table>
+
+<script>
+    function Limpiar() {
+        document.getElementById("nombre").value = "";
+        document.getElementById("frmEspecialidad").submit();
+
+    }
+</script>

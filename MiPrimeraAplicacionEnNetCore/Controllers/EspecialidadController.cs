@@ -10,7 +10,7 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
 {
     public class EspecialidadController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(EspecialidadCLS oEspecialidadCLS)
         {
             ViewBag.mensaje = "Mensaje desde el controlador hacia la vista";
 
@@ -19,16 +19,65 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
 
             using(BDHospitalContext bd = new BDHospitalContext())
             {
-                listaEspecialidad = (from vEspecialidad in bd.Especialidad
-                                     where vEspecialidad.Bhabilitado == 1
-                                     select new EspecialidadCLS
-                                     {
-                                         iidEspecialidad = vEspecialidad.Iidespecialidad,
-                                         nombre = vEspecialidad.Nombre,
-                                         descripcion = vEspecialidad.Descripcion
-                                     }).ToList();
+                if (oEspecialidadCLS.nombre == null || oEspecialidadCLS.nombre == "")
+                {
+                    listaEspecialidad = (from vEspecialidad in bd.Especialidad
+                                         where vEspecialidad.Bhabilitado == 1
+                                         select new EspecialidadCLS
+                                         {
+                                             iidEspecialidad = vEspecialidad.Iidespecialidad,
+                                             nombre = vEspecialidad.Nombre,
+                                             descripcion = vEspecialidad.Descripcion
+                                         }).ToList();
+                    ViewBag.nombreEspecialidad = "";
+                } else
+                {
+                    listaEspecialidad = (from vEspecialidad in bd.Especialidad
+                                         where vEspecialidad.Bhabilitado == 1 &&
+                                         vEspecialidad.Nombre.Contains(oEspecialidadCLS.nombre)
+                                         select new EspecialidadCLS
+                                         {
+                                             iidEspecialidad = vEspecialidad.Iidespecialidad,
+                                             nombre = vEspecialidad.Nombre,
+                                             descripcion = vEspecialidad.Descripcion
+                                         }).ToList();
+                    ViewBag.nombreEspecialidad = oEspecialidadCLS.nombre;
+                }
             }
             return View(listaEspecialidad);
+        }
+
+        public IActionResult Agregar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Agregar(EspecialidadCLS oEspecialidadCLS)
+        {
+            try
+            {
+                using (BDHospitalContext db = new BDHospitalContext())
+                {
+                     if (!ModelState.IsValid)
+                    {
+                        return View(oEspecialidadCLS);
+                    } else
+                    {
+                        Especialidad objetoEspecialidad = new Especialidad();
+                        objetoEspecialidad.Nombre = oEspecialidadCLS.nombre;
+                        objetoEspecialidad.Descripcion = oEspecialidadCLS.descripcion;
+                        objetoEspecialidad.Bhabilitado = 1;
+                        db.Especialidad.Add(objetoEspecialidad);
+                        db.SaveChanges();
+                    }
+                }
+            } catch (Exception e)
+            {
+                return View(oEspecialidadCLS);
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

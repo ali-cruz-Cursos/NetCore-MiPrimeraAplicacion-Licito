@@ -2,10 +2,16 @@
 
 @{
     ViewData["Title"] = "Index";
+    string nombreSede = ViewBag.nombreSede;
 }
 
 <h1>Index Sede</h1>
 
+<form id="frmSede" asp-controller="Sede" asp-action="Index" class="mb-2" method="post">
+    <label>Ingrese nombre sede</label>
+    <input type="text" class="form form-control" name="nombreSede" onkeyup="Buscar()" value="@nombreSede"/>
+
+</form>
 
 <table class="table">
     <thead class="thead-dark">
@@ -39,3 +45,10 @@
 }
     </tbody>
 </table>
+
+<script>
+    function Buscar() {
+        document.getElementById("frmSede").submit();
+
+    }
+</script>

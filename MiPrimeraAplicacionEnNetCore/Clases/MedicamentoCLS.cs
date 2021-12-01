@@ -9,19 +9,38 @@ namespace MiPrimeraAplicacionEnNetCore.Clases
     public class MedicamentoCLS
     {
         [Display(Name = "ID Medicamento")]
+        
         public int idMedicamento { get; set; }
 
         [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "Ingrese nombre del medicamento")]
         public string nombre { get; set; }
 
         [Display(Name = "Precio")]
+        [Required(ErrorMessage = "Ingrese el precio")]
         public double precio { get; set; }
 
         [Display(Name = "Stock")]
+        [Required(ErrorMessage = "Ingrese el stock")]
         public int stock { get; set; }
 
         [Display(Name = "Forma Farmaceutica")]
         public string formaFarmaceutica { get; set; }
+
+        [Display(Name = "Seleccione forma farmacuetica")]
+        [Required(ErrorMessage = "Ingrese la forma farmaceutica")]
+        public int idFormaFarmaceutica { get; set; }
+
+        [Display(Name = "Concentracion")]
+        public string concentracion { get; set; }
+
+        [Display(Name = "Presentacion")]
+        public string presentacion { get; set; }
+
+
+
+
+
 
     }
 }

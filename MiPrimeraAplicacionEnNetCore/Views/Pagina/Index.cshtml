@@ -8,6 +8,16 @@
 
 <h1>Paginas</h1>
 
+<a class="btn btn-secondary" asp-action="Agregar" asp-controller="Especialidad">Agregar</a>
+
+<form class="mb-2" id="frmPagina" asp-controller="Pagina" asp-action="Index" method="post"
+      style="display: grid; grid-template-columns: 1fr 2fr 1fr 1fr">
+    <label>Filtro por Mensaje</label>
+    <input type="text" id="mensaje" class="form-check form-control" name="mensaje" value="@ViewBag.Mensaje" />
+    <input type="submit" class="btn btn-primary" value="Buscar" />
+    <input type="button" value="Limpiar" class="btn btn-danger" onclick="Limpiar()" />
+</form>
+
 <table class="table">
     <thead class="thead-dark">
         <tr>
@@ -19,14 +29,20 @@
     </thead>
     <tbody>
         @foreach (PaginaCLS oPaginaCLS in Model)
-            {
-                <tr>
-                    <td>@oPaginaCLS.idPagina</td>
-                    <td>@oPaginaCLS.mensaje</td>
-                    <td>@oPaginaCLS.accion</td>
-                    <td>@oPaginaCLS.controlador</td>
-                </tr>
-            }
+        {
+            <tr>
+                <td>@oPaginaCLS.idPagina</td>
+                <td>@oPaginaCLS.mensaje</td>
+                <td>@oPaginaCLS.accion</td>
+                <td>@oPaginaCLS.controlador</td>
+            </tr>
+        }
     </tbody>
 </table>
 
+<script>
+    function Limpiar() {
+        document.getElementById("mensaje").value = "";
+        document.getElementById("frmPagina").submit();
+    }
+</script>
