@@ -9,6 +9,8 @@
 
 <h1>Medicamento</h1>
 
+<a class="btn btn-primary" asp-action="Agregar" asp-controller="Medicamento">Agregar</a>
+
 <form style="display: grid; grid-template-columns: 1fr 2fr"class="mb-2" id="formMedicamento">
     <label>Ingresa la forma</label>
     @Html.DropDownList("idFormaFarmaceutica", listaFormas, new { @class="form form-control"} )

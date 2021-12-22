@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\userone\\Downloads\\Proyectos\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj": {}
+    "C:\\Users\\userone\\Desktop\\Proyectos\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\userone\\Downloads\\Proyectos\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj": {
+    "C:\\Users\\userone\\Desktop\\Proyectos\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\userone\\Downloads\\Proyectos\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj",
+        "projectUniqueName": "C:\\Users\\userone\\Desktop\\Proyectos\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj",
         "projectName": "MiPrimeraAplicacionEnNetCore",
-        "projectPath": "C:\\Users\\userone\\Downloads\\Proyectos\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj",
+        "projectPath": "C:\\Users\\userone\\Desktop\\Proyectos\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj",
         "packagesPath": "C:\\Users\\userone\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\userone\\Downloads\\Proyectos\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\obj\\",
+        "outputPath": "C:\\Users\\userone\\Desktop\\Proyectos\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

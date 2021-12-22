@@ -37,6 +37,41 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
             ViewBag.listaFormas = listaFormaFarmaceutica();
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Agregar(MedicamentoCLS oMedicamentoCLS) {
+            try
+            {
+                using (BDHospitalContext db = new BDHospitalContext())
+                {
+                    if (!ModelState.IsValid)
+                    {
+                        ViewBag.listaFormas = listaFormaFarmaceutica();
+                        return View(oMedicamentoCLS);
+                    }
+                    else
+                    {
+                        Medicamento oMedicamento = new Medicamento();
+
+                        oMedicamento.Nombre = oMedicamentoCLS.nombre;
+                        oMedicamento.Concentracion = oMedicamentoCLS.concentracion;
+                        oMedicamento.Iidformafarmaceutica = oMedicamentoCLS.idFormaFarmaceutica;
+                        oMedicamento.Precio = (int)oMedicamentoCLS.precio;
+                        oMedicamento.Stock = oMedicamentoCLS.stock;
+                        oMedicamento.Presentacion = oMedicamentoCLS.presentacion;
+                        oMedicamento.Bhabilitado = 1;
+                        db.Medicamentos.Add(oMedicamento);
+                    }
+                }
+            } catch (Exception ex)
+            {
+
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
         public IActionResult Index(MedicamentoCLS omedicamentoCLS)
         {
 

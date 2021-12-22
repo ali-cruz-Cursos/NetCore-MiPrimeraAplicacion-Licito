@@ -22,6 +22,7 @@ namespace MiPrimeraAplicacionEnNetCore.Clases
 
         [Display(Name = "Stock")]
         [Required(ErrorMessage = "Ingrese el stock")]
+        [Range(0,10000, ErrorMessage = "Debe estar en el rango de 0 a 10000")]
         public int stock { get; set; }
 
         [Display(Name = "Forma Farmaceutica")]

@@ -1286,3 +1286,6 @@ C:\Users\userone\Downloads\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplic
 C:\Users\userone\Downloads\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\Razor\Views\Especialidad\Agregar.cshtml.g.cs
 C:\Users\userone\Downloads\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\MiPrimeraAplicacionEnNetCore.csproj.AssemblyReference.cache
 C:\Users\userone\Downloads\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\Razor\Views\Medicamento\Agregar.cshtml.g.cs
+C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\Razor\Views\Especialidad\Agregar.cshtml.g.cs
+C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\Razor\Views\Medicamento\Agregar.cshtml.g.cs
+C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\Razor\Views\TipoUsuario\Index.cshtml.g.cs
