@@ -61,6 +61,7 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
                         oMedicamento.Presentacion = oMedicamentoCLS.presentacion;
                         oMedicamento.Bhabilitado = 1;
                         db.Medicamentos.Add(oMedicamento);
+                        db.SaveChanges();
                     }
                 }
             } catch (Exception ex)
@@ -74,13 +75,13 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
 
         public IActionResult Index(MedicamentoCLS omedicamentoCLS)
         {
-
             
             ViewBag.listaFormasFarmaceuticas = listaFormaFarmaceutica();
             List<MedicamentoCLS> listaMedicamento = new List<MedicamentoCLS>();
             using(BDHospitalContext db = new BDHospitalContext())
             {
-                if (omedicamentoCLS.idFormaFarmaceutica == 0)
+                if (omedicamentoCLS.idFormaFarmaceutica == null || 
+                    omedicamentoCLS.idFormaFarmaceutica == 0)
                 {
                     listaMedicamento = (from medicamento in db.Medicamentos
                                         join formaFarmaceutica in db.FormaFarmaceuticas

@@ -16,7 +16,6 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
 
             using (BDHospitalContext db = new BDHospitalContext())
             {
-
                 ViewBag.Mensaje = oPaginaCLS.mensaje;
                 
                     listaPaginas = (from pagina in db.Paginas
@@ -63,6 +62,43 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
             }
 
                 return View(listaPaginas);
+        }
+
+        public IActionResult Agregar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Agregar(PaginaCLS oPaginaCLS)
+        {
+            try
+            {
+                using(BDHospitalContext db = new BDHospitalContext())
+                {
+                    if (!ModelState.IsValid)
+                    {
+                        return View(oPaginaCLS);
+                    }
+                    else
+                    {
+                        Pagina oPagina = new Pagina();
+
+                        oPagina.Mensaje = oPaginaCLS.mensaje;
+                        oPagina.Controlador = oPaginaCLS.controlador;
+                        oPagina.Accion = oPaginaCLS.accion;
+                        oPagina.Bhabilitado = 1;
+                        db.Paginas.Add(oPagina);
+                        db.SaveChanges();
+                    }
+                }
+
+            } catch (Exception e)
+            {
+                return View(oPaginaCLS);
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

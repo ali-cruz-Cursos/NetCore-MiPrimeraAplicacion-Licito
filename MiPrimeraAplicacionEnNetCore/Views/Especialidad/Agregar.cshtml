@@ -10,7 +10,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        <form asp-action="Agregar" method="post" id="frmNuevaEspecialidad">
+        <form asp-action="Agregar" asp-controller="Especialidad" method="post" id="frmNuevaEspecialidad">
             <div class="form-group">
                 <label asp-for="nombre"></label>
                 <input asp-for="nombre" class="form form-control" />

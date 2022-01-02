@@ -1,0 +1,76 @@
+﻿@model MiPrimeraAplicacionEnNetCore.Clases.PersonaCLS
+
+@{
+    ViewData["Title"] = "Agregar";
+    List<SelectListItem> listaSexo = ViewBag.listaSexo;
+}
+
+<h1>Agregar Persona</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Agregar" id="frmAgregarPersona" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="nombre" class="control-label"></label>
+                <input asp-for="nombre" class="form-control" />
+                <span asp-validation-for="nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="aPaterno" class="control-label"></label>
+                <input asp-for="aPaterno" class="form-control" />
+                <span asp-validation-for="aPaterno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="aMaterno" class="control-label"></label>
+                <input asp-for="aMaterno" class="form-control" />
+                <span asp-validation-for="aMaterno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="telefonoFijo" class="control-label"></label>
+                <input asp-for="telefonoFijo" class="form-control" />
+                <span asp-validation-for="telefonoFijo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="telefonoCelular" class="control-label"></label>
+                <input asp-for="telefonoCelular" class="form-control" />
+                <span asp-validation-for="telefonoCelular" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fechaNacimiento" class="control-label"></label>
+                <input asp-for="fechaNacimiento" class="form-control" />
+                <span asp-validation-for="fechaNacimiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="iidsexo" class="control-label"></label>
+                <select  asp-for="iidsexo" class="form-control" asp-items="@listaSexo"> </select>
+                <span asp-validation-for="iidsexo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="button" value="Guardar" class="btn btn-primary" onclick="agregarPersona()" />
+                <a asp-action="Index" class="btn btn-danger" asp-controller="Persona">Regresar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="~/js/sweetalert2.js"></script>
+<script src="~/js/generic.js"></script>
+
+<script>
+    function agregarPersona() {
+        mostrarModal().then(result => {
+            if (result.value) {
+                var frmAgregarPersona = document.getElementById("frmAgregarPersona");
+                frmAgregarPersona.submit();
+            }
+        })
+    }
+</script>

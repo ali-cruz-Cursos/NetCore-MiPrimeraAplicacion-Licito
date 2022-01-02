@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     @using MiPrimeraAplicacionEnNetCore.Clases;
     @model IEnumerable<PaginaCLS>
 
@@ -8,7 +7,7 @@
 
 <h1>Paginas</h1>
 
-<a class="btn btn-secondary" asp-action="Agregar" asp-controller="Especialidad">Agregar</a>
+<a class="btn btn-primary" asp-action="Agregar" asp-controller="Pagina">Agregar</a>
 
 <form class="mb-2" id="frmPagina" asp-controller="Pagina" asp-action="Index" method="post"
       style="display: grid; grid-template-columns: 1fr 2fr 1fr 1fr">

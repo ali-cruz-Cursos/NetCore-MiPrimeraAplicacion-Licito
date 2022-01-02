@@ -1,0 +1,51 @@
+﻿@model MiPrimeraAplicacionEnNetCore.Clases.PaginaCLS
+@{
+    ViewData["Title"] = "Agregar";
+}
+
+<h1>Agregar Pagina</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Agregar" asp-controller="Pagina" id="frmCreatePagina" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="mensaje" class="control-label"></label>
+                <input asp-for="mensaje" class="form-control" />
+                <span asp-validation-for="mensaje" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="accion" class="control-label"></label>
+                <input asp-for="accion" class="form-control" />
+                <span asp-validation-for="accion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="controlador" class="control-label"></label>
+                <input asp-for="controlador" class="form-control" />
+                <span asp-validation-for="controlador" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="button" value="Guardar" class="btn btn-primary" onclick="abrir()" />                
+                    <a asp-action="Index" class="btn btn-danger">Regresar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="~/js/sweetalert2.js"></script>
+<script src="~/js/generic.js"></script>
+
+<script>
+    function abrir() {
+        mostrarModal().then((result) => {
+            if (result.value) {
+                var frmCreatePagina = document.getElementById("frmCreatePagina");
+                frmCreatePagina.submit();
+            }
+
+        })
+    }
+
+</script>
+

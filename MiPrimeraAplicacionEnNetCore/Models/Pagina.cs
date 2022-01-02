@@ -11,7 +11,6 @@ namespace MiPrimeraAplicacionEnNetCore.Models
         {
             TipoUsuarioPaginas = new HashSet<TipoUsuarioPagina>();
         }
-
         public int Iidpagina { get; set; }
         public string Mensaje { get; set; }
         public string Accion { get; set; }

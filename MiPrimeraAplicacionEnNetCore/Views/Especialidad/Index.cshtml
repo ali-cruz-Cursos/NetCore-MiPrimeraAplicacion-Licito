@@ -9,6 +9,8 @@
 
 <h1>@ViewBag.mensaje</h1>
 
+<a class="btn btn-primary" asp-action="Agregar" asp-controller="Especialidad">Agregar</a>
+
 <form asp-controller="Especialidad" asp-action="Index" method="post" class="mb-2"
       style="display: grid; grid-template-columns: 1fr 2fr 1fr 1fr" id="frmEspecialidad">
     <label>Ingrese nombre especialidad</label>
