@@ -5,9 +5,9 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Paginas</h1>
+<h1>Lista Paginas</h1>
 
-<a class="btn btn-primary" asp-action="Agregar" asp-controller="Pagina">Agregar</a>
+<a class="btn btn-primary btn-sm" asp-action="Agregar" asp-controller="Pagina"><i class="fas fa-plus"></i>Agregar Pagina</a>
 
 <form class="mb-2" id="frmPagina" asp-controller="Pagina" asp-action="Index" method="post"
       style="display: grid; grid-template-columns: 1fr 2fr 1fr 1fr">
@@ -44,4 +44,4 @@
         document.getElementById("mensaje").value = "";
         document.getElementById("frmPagina").submit();
     }
-</script>
+</script> 

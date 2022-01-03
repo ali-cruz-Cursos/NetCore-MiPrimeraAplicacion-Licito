@@ -30,11 +30,13 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
             }
             ViewBag.listaSexo = listaSexo;
         }
+
         public IActionResult Index(PersonaCLS oPersonaCLS)
         {
             llenarSexo();
-            List<PersonaCLS> listaPersona = new List<PersonaCLS>();
-            using(BDHospitalContext db = new BDHospitalContext())
+            List<PersonaCLS> listaPersona = new List<PersonaCLS>();            
+
+            using (BDHospitalContext db = new BDHospitalContext())
             {
                 if (oPersonaCLS.iidsexo == 0 ||
                     oPersonaCLS.iidsexo == null)

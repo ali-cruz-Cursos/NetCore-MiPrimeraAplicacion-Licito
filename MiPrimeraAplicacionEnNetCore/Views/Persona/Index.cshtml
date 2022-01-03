@@ -7,13 +7,12 @@
 }
 
 <h1>Index Persona</h1>
-
 <a class="btn btn-primary" asp-action="Agregar" asp-controller="Persona">Nuevo</a>
 
 <form id="frmPersona" asp-controller="Persona" asp-action="Index" method="post"
       style="display: grid; grid-template-columns: 1fr 2fr 1fr 1fr" class="mb-2">
     <label>Ingrese Sexo</label>
-    @Html.DropDownList("idsexo", listaSexo, new { @class="form form-control" })
+    @Html.DropDownList("iidsexo", listaSexo, new { @class = "form form-control" })
     <input type="submit" class="btn btn-primary" value="Buscar" />
     <input type="button" class="btn btn-danger" value="Limpiar" onclick="Limpiar()" />
 </form>
@@ -21,28 +20,28 @@
 <table class="table">
     <thead class="thead-dark">
         <tr>
-            <th>@Html.DisplayNameFor(model=>model.iidPersona)</th>
-            <th>@Html.DisplayNameFor(model=>model.nombreCompleto)</th>
-            <th>@Html.DisplayNameFor(model=>model.email)</th>
-            <th>@Html.DisplayNameFor(model=>model.nombreSexo)</th>
+            <th>@Html.DisplayNameFor(model => model.iidPersona)</th>
+            <th>@Html.DisplayNameFor(model => model.nombreCompleto)</th>
+            <th>@Html.DisplayNameFor(model => model.email)</th>
+            <th>@Html.DisplayNameFor(model => model.nombreSexo)</th>
         </tr>
     </thead>
     <tbody>
         @foreach (PersonaCLS oPersonaCLS in Model)
-            {
-                <tr>
-                    <td>@oPersonaCLS.iidPersona</td>
-                    <td>@oPersonaCLS.nombreCompleto</td>
-                    <td>@oPersonaCLS.email</td>
-                    <td>@oPersonaCLS.nombreSexo</td>
-                </tr>
-            }
+        {
+            <tr>
+                <td>@oPersonaCLS.iidPersona</td>
+                <td>@oPersonaCLS.nombreCompleto</td>
+                <td>@oPersonaCLS.email</td>
+                <td>@oPersonaCLS.nombreSexo</td>
+            </tr>
+        }
     </tbody>
 </table>
 
 <script>
     function Limpiar() {
-        document.getElementById("idsexo").value = "";
+        document.getElementById("iidsexo").value = "";
         document.getElementById("frmPersona").submit();
     }
-</script>
+</script> 

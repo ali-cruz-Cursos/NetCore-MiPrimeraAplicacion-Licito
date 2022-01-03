@@ -1,0 +1,47 @@
+﻿@model MiPrimeraAplicacionEnNetCore.Clases.TipoUsuarioCLS
+
+@{
+    ViewData["Title"] = "Agregar";
+}
+
+<h1>Agregar</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Agregar" method="post" id="frmAgregarTipoUsuario">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="nombre" class="control-label"></label>
+                <input asp-for="nombre" class="form-control" />
+                <span asp-validation-for="nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="descripcion" class="control-label"></label>
+                <input asp-for="descripcion" class="form-control" />
+                <span asp-validation-for="descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+                <input type="button" value="Agregar" class="btn btn-primary" onclick="agregarTipoUsuario()"  />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script src="~/js/sweetalert2.js"></script>
+<script src="~/js/generic.js"></script>
+
+<script>
+    function agregarTipoUsuario() {
+        mostrarModal().then(result => {
+            if (result.value) {
+                var frmAgregarTipoUsuario = document.getElementById("frmAgregarTipoUsuario");
+                frmAgregarTipoUsuario.submit();
+            }
+        })
+    }
+</script>

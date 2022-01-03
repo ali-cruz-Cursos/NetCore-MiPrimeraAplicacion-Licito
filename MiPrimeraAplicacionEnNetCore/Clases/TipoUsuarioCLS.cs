@@ -12,9 +12,11 @@ namespace MiPrimeraAplicacionEnNetCore.Clases
         public int idTipoUsuario { get; set; }
 
         [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "Ingrese un nombre")]
         public string nombre { get; set; }
 
         [Display(Name = "Descripcion")]
+        [Required(ErrorMessage = "Ingrese una descripcion")]
         public string descripcion { get; set; }
 
     }
