@@ -21,6 +21,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.descripcion)
                 </th>
+                <th>Operaciones</th>
             </tr>
             <tr>
                 <th>
@@ -40,6 +41,9 @@
                 <th>
                     <input type="text" value="@ViewBag.Descripcion" name="descripcion" class="form form-control" />
                 </th>
+                <th>
+
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -55,9 +59,35 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.descripcion)
                     </td>
+                    <td>
+                        <i class="fa fa-trash btn btn-danger" aria-hidden="true" onclick="eliminarTipoUsuario(@item.idTipoUsuario)"></i>
+                    </td>
 
                 </tr>
             }
         </tbody>
     </table>
 </form>
+
+<form asp-action="Eliminar" asp-controller="TipoUsuario" method="post" id="frmEliminarTipoUsuario">
+    <input type="hidden" name="idTipoUsuario" id="txtTipoUsuario" />
+</form>
+
+<script src="~/js/sweetalert2.js"></script>
+<script src="~/js/generic.js"></script>
+
+
+<script>
+    function eliminarTipoUsuario(idTipoUsuario) {
+        document.getElementById("txtTipoUsuario").value = idTipoUsuario;
+
+        mostrarModal().then(res => {
+            if (res.value) {
+                var frmEliminarTipoUsuario = document.getElementById("frmEliminarTipoUsuario");
+                frmEliminarTipoUsuario.submit();
+            }
+        })
+
+    }
+
+</script>

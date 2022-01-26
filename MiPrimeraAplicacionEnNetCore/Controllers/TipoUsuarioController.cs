@@ -55,6 +55,20 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
             return View(listaTipoUsuarios);
         }
 
+
+        [HttpPost]
+        public IActionResult Eliminar(int idTipoUsuario)
+        {
+            using(BDHospitalContext db = new BDHospitalContext())
+            {
+                TipoUsuario oTipoUsuario = db.TipoUsuarios.Where(p => p.Iidtipousuario == idTipoUsuario).First();
+                db.TipoUsuarios.Remove(oTipoUsuario);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Agregar()
         {
             return View();

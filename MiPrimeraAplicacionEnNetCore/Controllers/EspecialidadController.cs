@@ -53,6 +53,30 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
         }
 
         [HttpPost]
+        public IActionResult Eliminar(int Iidespecialidad)
+        {
+            string error;
+
+            try
+            {
+                using(BDHospitalContext db = new BDHospitalContext())
+                {
+                    Especialidad oEspecialidad = db.Especialidad
+                        .Where(p => p.Iidespecialidad == Iidespecialidad).First();
+                                                    oEspecialidad.Bhabilitado = 0;
+                    db.SaveChanges();
+                }
+
+            } catch(Exception ex)
+            {
+                error = ex.Message;
+
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
         public IActionResult Agregar(EspecialidadCLS oEspecialidadCLS)
         {
             try

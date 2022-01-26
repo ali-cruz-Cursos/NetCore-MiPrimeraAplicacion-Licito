@@ -33,16 +33,39 @@
                     <td>@oEspecialidad.iidEspecialidad</td>
                     <td>@oEspecialidad.nombre</td>
                     <td>@oEspecialidad.descripcion</td>
+                    <td>
+                        <i class="fa fa-trash btn btn-danger" aria-hidden="true" onclick="eliminarEspecialidad(@oEspecialidad.iidEspecialidad)">
+                        </i>                      
+                            
+                    </td>
                 </tr>
             }
     </dbody>
 
 </table>
 
+<form asp-action="Eliminar" asp-controller="Especialidad" method="post" id="frmEliminarEspecialidad">
+    <input type="text" id="txtIdEspecialidad" name="Iidespecialidad" />
+</form>
+
+<script src="~/js/sweetalert2.js"></script>
+<script src="~/js/generic.js"></script>
+
 <script>
     function Limpiar() {
         document.getElementById("nombre").value = "";
         document.getElementById("frmEspecialidad").submit();
+
+    }
+
+    function eliminarEspecialidad(idEspecialidad) {
+        document.getElementById("txtIdEspecialidad").value = idEspecialidad;
+        mostrarModal().then(res => {
+            if (res.value) {
+                var frmEliminarEspecialidad = document.getElementById("frmEliminarEspecialidad");
+                frmEliminarEspecialidad.submit();
+            }
+        })
 
     }
 </script>
