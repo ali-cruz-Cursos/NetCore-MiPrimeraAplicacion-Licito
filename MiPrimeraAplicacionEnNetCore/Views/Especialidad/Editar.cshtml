@@ -5,17 +5,23 @@
     ViewData["Title"] = "Agregar";
 }
 
-<h1>Crear especialidad</h1>
+<h1>Editar especialidad</h1>
 <hr />
 
 <div class="row">
     <div class="col-md-6">
-        <form asp-action="Guardar" asp-controller="Especialidad" method="post" id="frmNuevaEspecialidad">
+        <form asp-action="Guardar" method="post" id="frmEditarEspecialidad">
+            <div class="form-group">
+                <label asp-for="iidEspecialidad"></label>
+                <input asp-for="iidEspecialidad" class="form form-control" />
+                <span asp-validation-for="iidEspecialidad" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="nombre"></label>
                 <input asp-for="nombre" class="form form-control" />
                 <span asp-validation-for="nombre" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="descripcion"></label>
                 <input asp-for="descripcion" class="form form-control" />
@@ -36,11 +42,11 @@
     function AbrirModal() {
         mostrarModal().then((result) => {
             if (result.isConfirmed) {
-                var frmNuevaEspecialidad = document.getElementById("frmNuevaEspecialidad");
-                frmNuevaEspecialidad.submit();
+                var frmEditarEspecialidad = document.getElementById("frmEditarEspecialidad");
+                frmEditarEspecialidad.submit();
                 Swal.fire(
-                    'Agregado!',
-                    'Haz agregado un nuevo registro exitosamente.',
+                    'Editado!',
+                    'Haz editado un  registro exitosamente.',
                     'success'
                 )
             }

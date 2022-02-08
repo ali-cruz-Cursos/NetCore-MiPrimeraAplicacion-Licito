@@ -24,6 +24,7 @@
             <th>@Html.DisplayNameFor(model => model.mensaje)</th>
             <th>@Html.DisplayNameFor(model => model.accion)</th>
             <th>@Html.DisplayNameFor(model => model.controlador)</th>
+            <th>Operaciones</th>
         </tr>
     </thead>
     <tbody>
@@ -34,14 +35,37 @@
                 <td>@oPaginaCLS.mensaje</td>
                 <td>@oPaginaCLS.accion</td>
                 <td>@oPaginaCLS.controlador</td>
+                <td>
+                    <i class="fa fa-trash btn btn-danger" aria-hidden="true" onclick="eliminarPagina(@oPaginaCLS.idPagina)"> </i>
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
+<form asp-action="Eliminar" asp-controller="Pagina" method="post" id="frmEliminarPagina">
+    <input type="text" id="txtIdPagina" name="Iidpagina" />
+</form>
+
+<script src="~/js/sweetalert2.js"></script>
+<script src="~/js/generic.js"></script>
+
+
 <script>
     function Limpiar() {
         document.getElementById("mensaje").value = "";
         document.getElementById("frmPagina").submit();
+    }
+
+
+    function eliminarPagina(idEspecialidad) {
+        document.getElementById("txtIdPagina").value = idEspecialidad;
+        mostrarModal().then(res => {
+            if (res.value) {
+                var frmEliminarPagina = document.getElementById("frmEliminarPagina");
+                frmEliminarPagina.submit();
+            }
+        })
+
     }
 </script> 

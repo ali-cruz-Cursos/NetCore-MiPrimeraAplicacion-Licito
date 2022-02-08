@@ -70,6 +70,26 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
         }
 
         [HttpPost]
+        public IActionResult Elimiar(int Iidpagina)
+        {
+            string error;
+            try
+            {
+                using (BDHospitalContext db = new BDHospitalContext())
+                {
+                    Pagina oPagina = db.Paginas.Where(p => p.Iidpagina == Iidpagina).First();
+                    db.Paginas.Remove(oPagina);
+                    db.SaveChanges();
+                }
+            } catch (Exception e)
+            {
+                error = e.Message;
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
         public IActionResult Agregar(PaginaCLS oPaginaCLS)
         {
             try

@@ -52,6 +52,24 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
             return View();
         }
 
+        public IActionResult Editar(int id)
+        {
+            EspecialidadCLS oEspecialidadCLS = new EspecialidadCLS();
+            using(BDHospitalContext db = new BDHospitalContext())
+            {
+                oEspecialidadCLS = (from especialidad in db.Especialidad
+                                    where especialidad.Iidespecialidad == id
+                                    select new EspecialidadCLS
+                                    {
+                                        iidEspecialidad = especialidad.Iidespecialidad,
+                                        nombre = especialidad.Nombre,
+                                        descripcion = especialidad.Descripcion
+                                    }).First();
+
+            }
+            return View(oEspecialidadCLS);
+        }
+
         [HttpPost]
         public IActionResult Eliminar(int Iidespecialidad)
         {
@@ -77,7 +95,7 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
         }
 
         [HttpPost]
-        public IActionResult Agregar(EspecialidadCLS oEspecialidadCLS)
+        public IActionResult Guardar(EspecialidadCLS oEspecialidadCLS)
         {
             try
             {
@@ -88,12 +106,21 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
                         return View(oEspecialidadCLS);
                     } else
                     {
-                        Especialidad objetoEspecialidad = new Especialidad();
-                        objetoEspecialidad.Nombre = oEspecialidadCLS.nombre;
-                        objetoEspecialidad.Descripcion = oEspecialidadCLS.descripcion;
-                        objetoEspecialidad.Bhabilitado = 1;
-                        db.Especialidad.Add(objetoEspecialidad);
-                        db.SaveChanges();
+                        if (oEspecialidadCLS.iidEspecialidad == 0)
+                        {
+                            Especialidad objetoEspecialidad = new Especialidad();
+                            objetoEspecialidad.Nombre = oEspecialidadCLS.nombre;
+                            objetoEspecialidad.Descripcion = oEspecialidadCLS.descripcion;
+                            objetoEspecialidad.Bhabilitado = 1;
+                            db.Especialidad.Add(objetoEspecialidad);
+                            db.SaveChanges();
+                        } else
+                        {
+                            Especialidad objeto = db.Especialidad.Where(p => p.Iidespecialidad == oEspecialidadCLS.iidEspecialidad).First();
+                            objeto.Nombre = oEspecialidadCLS.nombre;
+                            objeto.Descripcion = oEspecialidadCLS.descripcion;
+                            db.SaveChanges();
+                        }
                     }
                 }
             } catch (Exception e)

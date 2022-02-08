@@ -34,9 +34,11 @@
                     <td>@oEspecialidad.nombre</td>
                     <td>@oEspecialidad.descripcion</td>
                     <td>
-                        <i class="fa fa-trash btn btn-danger" aria-hidden="true" onclick="eliminarEspecialidad(@oEspecialidad.iidEspecialidad)">
-                        </i>                      
-                            
+                        <i class="fa fa-trash btn btn-danger" aria-hidden="true"
+                           onclick="eliminarEspecialidad(@oEspecialidad.iidEspecialidad)">
+                        </i>
+                        <a class="fa fa-edit btn btn-primary" aria-hidden="true" asp-controller="Especialidad" asp-action="Editar" asp-route-id="@oEspecialidad.iidEspecialidad"/>
+
                     </td>
                 </tr>
             }
