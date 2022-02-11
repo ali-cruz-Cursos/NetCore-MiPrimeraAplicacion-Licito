@@ -24,18 +24,24 @@
             <th>@Html.DisplayNameFor(model => model.precio)</th>
             <th>@Html.DisplayNameFor(model => model.stock)</th>
             <th>@Html.DisplayNameFor(model => model.formaFarmaceutica)</th>
+            <th>Operaciones</th>
         </tr>
     </thead>
     <tbody>
         @foreach (MedicamentoCLS oMedicamento in Model)
             {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => oMedicamento.idMedicamento)</td>
-                    <td>@Html.DisplayFor(modelItem => oMedicamento.nombre)</td>
-                    <td>@Html.DisplayFor(modelItem => oMedicamento.precio)</td>
-                    <td>@Html.DisplayFor(modelItem => oMedicamento.stock)</td>
-                    <td>@Html.DisplayFor(modelItem => oMedicamento.formaFarmaceutica)</td>
-                </tr>
+        <tr>
+            <td>@Html.DisplayFor(modelItem => oMedicamento.idMedicamento)</td>
+            <td>@Html.DisplayFor(modelItem => oMedicamento.nombre)</td>
+            <td>@Html.DisplayFor(modelItem => oMedicamento.precio)</td>
+            <td>@Html.DisplayFor(modelItem => oMedicamento.stock)</td>
+            <td>@Html.DisplayFor(modelItem => oMedicamento.formaFarmaceutica)</td>
+            <td>
+                <i class="fa fa-trash btn btn-danger" aria-hidden="true" onclick="eliminarMedicamento(@oMedicamento.idMedicamento)"></i>
+                <a class="fa fa-edit btn btn-primary" aria-hidden="true" asp-controller="Medicamento" asp-action="Editar" asp-route-id="@oMedicamento.idMedicamento" />
+
+            </td>
+        </tr>
             }
             
     </tbody>

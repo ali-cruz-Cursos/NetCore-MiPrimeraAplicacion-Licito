@@ -97,13 +97,20 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
         [HttpPost]
         public IActionResult Guardar(EspecialidadCLS oEspecialidadCLS)
         {
+            string nombreVista = "";
+
             try
             {
+                if (oEspecialidadCLS.iidEspecialidad == 0) 
+                    nombreVista = "Agregar";
+                else 
+                    nombreVista = "Editar";
+
                 using (BDHospitalContext db = new BDHospitalContext())
                 {
                      if (!ModelState.IsValid)
                     {
-                        return View(oEspecialidadCLS);
+                        return View(nombreVista, oEspecialidadCLS);
                     } else
                     {
                         if (oEspecialidadCLS.iidEspecialidad == 0)
@@ -125,7 +132,7 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
                 }
             } catch (Exception e)
             {
-                return View(oEspecialidadCLS);
+                return View(nombreVista, oEspecialidadCLS);
             }
 
             return RedirectToAction("Index");

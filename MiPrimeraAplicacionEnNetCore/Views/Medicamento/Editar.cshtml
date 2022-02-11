@@ -1,0 +1,76 @@
+﻿@using MiPrimeraAplicacionEnNetCore.Clases;
+@model MedicamentoCLS
+
+@{
+    ViewData["Title"] = "Editar Medicamento";
+}
+
+<h1>Editar Medicamentos</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Guardar" asp-controller="Medicamento" id="frmEditarMedicamento" method="post">
+            <div class="form-group">
+                <label asp-for="idMedicamento"></label>
+                <input type="text" class="form-check form-control" readonly 
+                       asp-for="idMedicamento" />
+                <span asp-validation-for="idMedicamento" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="nombre"></label>
+                <input type="text" class="form-check form-control" asp-for="nombre" />
+                <span asp-validation-for="nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="concentracion"></label>
+                <input type="text" class="form form-control" asp-for="concentracion" />
+                <span asp-validation-for="concentracion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="idFormaFarmaceutica"></label>
+                <select asp-for="idFormaFarmaceutica" class="form form-control"
+                        asp-items="@ViewBag.listaFormas">
+                </select>
+                <span asp-validation-for="idFormaFarmaceutica" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="precio"></label>
+                <input type="text" class="form form-control" asp-for="precio" />
+                <span asp-validation-for="precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="stock"></label>
+                <input type="number" class="form form-control" asp-for="stock" />
+                <span asp-validation-for="stock" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="presentacion"></label>
+                <input type="text" class="form form-control" asp-for="presentacion" />
+                <span asp-validation-for="presentacion" class="text-danger"></span>
+            </div>
+
+            <div>
+                <input type="button" value="Guardar" onclick="Abrir()" class="btn btn-primary" />
+                <a class="btn btn-danger" asp-action="Index" asp-controller="Medicamento">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="~/js/sweetalert2.js"></script>
+<script src="~/js/generic.js"></script>
+
+
+<script>
+    function Abrir() {
+        mostrarModal().then((result) => {
+            if (result.value) {
+                var frmEditarMedicamento = document.getElementById("frmEditarMedicamento");
+                frmEditarMedicamento.submit();
+            }
+        })
+    }
+</script>
+
