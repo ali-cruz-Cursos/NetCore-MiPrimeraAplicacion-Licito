@@ -114,5 +114,20 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
 
             return RedirectToAction("Index");
         }
+
+
+        // Eliminado virtual
+        [HttpPost]
+        public IActionResult Editar(int idPersona)
+        {
+            using(BDHospitalContext db = new BDHospitalContext()) 
+            {
+                Persona oPersona = db.Persona.Where(p => p.Iidpersona == idPersona).First();
+                oPersona.Bhabilitado = 0;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

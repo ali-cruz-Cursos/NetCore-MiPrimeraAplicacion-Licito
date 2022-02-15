@@ -24,6 +24,7 @@
             <th>@Html.DisplayNameFor(model => model.nombreCompleto)</th>
             <th>@Html.DisplayNameFor(model => model.email)</th>
             <th>@Html.DisplayNameFor(model => model.nombreSexo)</th>
+            <th>Operaciones</th>
         </tr>
     </thead>
     <tbody>
@@ -34,14 +35,33 @@
                 <td>@oPersonaCLS.nombreCompleto</td>
                 <td>@oPersonaCLS.email</td>
                 <td>@oPersonaCLS.nombreSexo</td>
+                <td><i class="fa fa-trash btn btn-danger" onclick="eliminarPersona(@oPersonaCLS.iidPersona)"></i></td>
             </tr>
         }
     </tbody>
 </table>
 
+<form asp-action="Editar" asp-controller="Persona" method="post" id="frmEliminarPersona">
+    <input type="hidden" name="idPersona" id="idPersona" />
+</form>
+
+<script src="~/js/sweetalert2.js"></script>
+<script src="~/js/generic.js"></script>
+
 <script>
     function Limpiar() {
         document.getElementById("iidsexo").value = "";
         document.getElementById("frmPersona").submit();
+    }
+
+    function eliminarPersona(id) {
+        document.getElementById("idPersona").value = id;
+
+        mostrarModal().then(res => {
+            if (res.value) {
+                var frmEliminarPersona = document.getElementById("frmEliminarPersona");
+                frmEliminarPersona.submit();
+            }
+        })
     }
 </script> 

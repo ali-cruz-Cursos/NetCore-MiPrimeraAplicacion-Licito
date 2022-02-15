@@ -47,9 +47,28 @@
     </tbody>
 </table>
 
+<script src="~/js/sweetalert2.js"></script>
+<script src="~/js/generic.js"></script>
+
+<form asp-action="Eliminar" asp-controller="Medicamento" method="post" id="frmEliminarMedicamento">
+    <input type="hidden" name="idMedicamento" id="idMedicamento" />
+</form>
+
 <script>
     var idFormaFarmaceutica = document.getElementById("idFormaFarmaceutica");
     idFormaFarmaceutica.onchange = function () {
         document.getElementById("formMedicamento").submit();
     }
+
+    function eliminarMedicamento(id) {
+        document.getElementById("idMedicamento").value = id;
+
+        mostrarModal().then(res => {
+            if (res.value) {
+                var frmEliminarMedicamento = document.getElementById("frmEliminarMedicamento");
+                frmEliminarMedicamento.submit();
+            }
+        })
+    }
+
 </script>

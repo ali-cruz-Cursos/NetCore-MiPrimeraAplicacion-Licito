@@ -168,5 +168,17 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
             }   
             return View(listaMedicamento);
         }
+
+        public IActionResult Eliminar(int idMedicamento)
+        {
+            using(BDHospitalContext db = new BDHospitalContext())
+            {
+                Medicamento oMedicamento = db.Medicamentos.Where(m => m.Iidmedicamento == idMedicamento).First();
+                db.Medicamentos.Remove(oMedicamento);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
