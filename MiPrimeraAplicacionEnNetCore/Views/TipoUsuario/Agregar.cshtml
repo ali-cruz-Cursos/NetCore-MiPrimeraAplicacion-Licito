@@ -10,18 +10,26 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Agregar" method="post" id="frmAgregarTipoUsuario">
+        <form asp-action="Guardar" method="post" id="frmAgregarTipoUsuario">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
                 <label asp-for="nombre" class="control-label"></label>
                 <input asp-for="nombre" class="form-control" />
                 <span asp-validation-for="nombre" class="text-danger"></span>
+                @if (Model != null && Model.mensajeErrorNombre != null)
+                {
+                    <p class="text-danger">@Model.mensajeErrorNombre</p>
+                }
             </div>
             <div class="form-group">
                 <label asp-for="descripcion" class="control-label"></label>
                 <input asp-for="descripcion" class="form-control" />
                 <span asp-validation-for="descripcion" class="text-danger"></span>
+                @if (Model != null && Model.mensajeErrorDescripcion != null)
+                {
+                    <p class="text-danger">@Model.mensajeErrorDescripcion</p>
+                }
             </div>
             <div class="form-group">
                 <a asp-action="Index" class="btn btn-danger">Cancelar</a>

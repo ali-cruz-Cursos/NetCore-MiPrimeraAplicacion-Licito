@@ -98,6 +98,7 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
         public IActionResult Guardar(EspecialidadCLS oEspecialidadCLS)
         {
             string nombreVista = "";
+            int nveces = 0;
 
             try
             {
@@ -108,9 +109,25 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
 
                 using (BDHospitalContext db = new BDHospitalContext())
                 {
-                     if (!ModelState.IsValid)
+
+                    // Validar si ya existe 
+                    
+                    if (oEspecialidadCLS.iidEspecialidad == 0)
                     {
-                        return View(nombreVista, oEspecialidadCLS);
+                        nveces = db.Especialidad.Where(p => p.Nombre.ToUpper().Trim() == oEspecialidadCLS.nombre.ToUpper().Trim()).Count();
+                    } else
+                    {
+                        nveces = db.Especialidad.Where(p => p.Nombre.ToUpper().Trim() == oEspecialidadCLS.nombre.ToUpper().Trim() && p.Iidespecialidad != oEspecialidadCLS.iidEspecialidad).Count();
+                    }
+
+                     if (!ModelState.IsValid || nveces >= 1)
+                    {
+                        if (nveces >= 1)
+                        {
+                            oEspecialidadCLS.mensajeError = "El nombre especialidad ya existe";
+                            return View(nombreVista, oEspecialidadCLS);
+                        }
+                        
                     } else
                     {
                         if (oEspecialidadCLS.iidEspecialidad == 0)

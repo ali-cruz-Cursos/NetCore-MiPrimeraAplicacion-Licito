@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using MiPrimeraAplicacionEnNetCore.Clases;
 
 #nullable disable
 
@@ -686,5 +687,7 @@ namespace MiPrimeraAplicacionEnNetCore.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<MiPrimeraAplicacionEnNetCore.Clases.PersonaCLS> PersonaCLS { get; set; }
     }
 }

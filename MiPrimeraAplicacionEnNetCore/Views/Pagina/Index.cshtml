@@ -7,7 +7,7 @@
 
 <h1>Lista Paginas</h1>
 
-<a class="btn btn-primary btn-sm" asp-action="Agregar" asp-controller="Pagina"><i class="fas fa-plus"></i>Agregar Pagina</a>
+<a class="btn btn-primary btn-sm" asp-action="Agregar" asp-controller="Pagina"><i class="fas fa-plus"></i> Agregar Pagina</a>
 
 <form class="mb-2" id="frmPagina" asp-controller="Pagina" asp-action="Index" method="post"
       style="display: grid; grid-template-columns: 1fr 2fr 1fr 1fr">
@@ -37,6 +37,7 @@
                 <td>@oPaginaCLS.controlador</td>
                 <td>
                     <i class="fa fa-trash btn btn-danger" aria-hidden="true" onclick="eliminarPagina(@oPaginaCLS.idPagina)"> </i>
+                    <a asp-action="Editar" asp-controller="Pagina" asp-route-id="@oPaginaCLS.idPagina"><i class="fa fa-edit btn btn-primary" aria-hidden="true"></i></a>
                 </td>
             </tr>
         }
@@ -46,6 +47,7 @@
 <form asp-action="Eliminar" asp-controller="Pagina" method="post" id="frmEliminarPagina">
     <input type="text" id="txtIdPagina" name="Iidpagina" />
 </form>
+
 
 <script src="~/js/sweetalert2.js"></script>
 <script src="~/js/generic.js"></script>
@@ -58,14 +60,15 @@
     }
 
 
-    function eliminarPagina(idEspecialidad) {
-        document.getElementById("txtIdPagina").value = idEspecialidad;
+    function eliminarPagina(idPagina) {
+        document.getElementById("txtIdPagina").value = idPagina;
         mostrarModal().then(res => {
             if (res.value) {
                 var frmEliminarPagina = document.getElementById("frmEliminarPagina");
                 frmEliminarPagina.submit();
             }
         })
-
     }
+
+
 </script> 

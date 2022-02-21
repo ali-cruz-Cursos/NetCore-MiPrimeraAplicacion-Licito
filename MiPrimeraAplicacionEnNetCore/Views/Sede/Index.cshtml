@@ -45,6 +45,7 @@
             </td>
             <td>
                 <i class="fa fa-trash btn btn-danger" aria-hidden="true" onclick="eliminarSede(@item.iidSede)" ></i>
+                <a class="fa fa-edit btn btn-primary" aria-hidden="true" asp-controller="Sede" asp-action="Editar" asp-route-id="@item.iidSede"></a>
             </td>
 
         </tr>

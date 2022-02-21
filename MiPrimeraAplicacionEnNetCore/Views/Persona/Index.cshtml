@@ -35,7 +35,10 @@
                 <td>@oPersonaCLS.nombreCompleto</td>
                 <td>@oPersonaCLS.email</td>
                 <td>@oPersonaCLS.nombreSexo</td>
-                <td><i class="fa fa-trash btn btn-danger" onclick="eliminarPersona(@oPersonaCLS.iidPersona)"></i></td>
+                <td>
+                    <i class="fa fa-trash btn btn-danger" onclick="eliminarPersona(@oPersonaCLS.iidPersona)"></i>
+                    <a asp-action="Editar" asp-controller="Persona" asp-route-id="@oPersonaCLS.iidPersona"><i class="fa fa-edit btn btn-primary" aria-hidden="true"></i></a>
+                </td>
             </tr>
         }
     </tbody>

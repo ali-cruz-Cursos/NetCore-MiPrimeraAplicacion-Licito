@@ -15,6 +15,10 @@
                 <label asp-for="nombre"></label>
                 <input asp-for="nombre" class="form form-control" />
                 <span asp-validation-for="nombre" class="text-danger"></span>
+                @if (Model != null && Model.mensajeError != null && Model.mensajeError != "")
+                {
+                    <p class="text-danger">El nombre de la especialidad ya existe</p>
+                }
             </div>
             <div class="form-group">
                 <label asp-for="descripcion"></label>

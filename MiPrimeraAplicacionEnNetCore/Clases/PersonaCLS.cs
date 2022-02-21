@@ -9,6 +9,7 @@ namespace MiPrimeraAplicacionEnNetCore.Clases
     public class PersonaCLS
     {
         [Display(Name = "ID Persona")]
+        [Key]
         public int iidPersona { get; set; }
 
         [Required(ErrorMessage = "Ingrese un sexo valido")]
@@ -53,6 +54,8 @@ namespace MiPrimeraAplicacionEnNetCore.Clases
 
         [Display(Name = "Sexo")]
         public string nombreSexo { get; set; }
+
+        public string mensajeError { get; set; }
 
     } 
 }

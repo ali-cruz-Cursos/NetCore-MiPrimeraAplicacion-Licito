@@ -74,33 +74,68 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
             return View();
         }
 
+        // Guarda nuevo usuario en la bd.
         [HttpPost]
-        public IActionResult Agregar(TipoUsuarioCLS oTipoUsuarioCLS)
+        public IActionResult Guardar(TipoUsuarioCLS oTipoUsuarioCLS)
         {
+            string nombreVista = "";
+            int nvecesNombre = 0;
+            int nvecesDescription = 0;
+
             try
             {
-                if (ModelState.IsValid)
+                // Nuevo registro
+                if (oTipoUsuarioCLS.idTipoUsuario == 0)
                 {
-                    using (BDHospitalContext bd = new BDHospitalContext())
+                    nombreVista = "Agregar";
+                } else
+                {
+                    nombreVista = "Editar";
+                }
+                
+                using (BDHospitalContext bd = new BDHospitalContext())
+                {
+                    if (oTipoUsuarioCLS.idTipoUsuario == 0)
                     {
-                        TipoUsuario oTipoUsuario = new TipoUsuario() {
+                        // Nuevo registro
+                        nvecesNombre = bd.TipoUsuarios.Where(p => p.Nombre.ToUpper().Trim() == oTipoUsuarioCLS.nombre.ToUpper().Trim()).Count();
+                        nvecesDescription = bd.TipoUsuarios.Where(p => p.Descripcion.ToUpper().Trim() == oTipoUsuarioCLS.descripcion.ToUpper().Trim()).Count();
+                    } else
+                    {
+                        // Edicion
+                        nvecesNombre = bd.TipoUsuarios.Where(p => p.Nombre.ToUpper().Trim() == oTipoUsuarioCLS.nombre.ToUpper().Trim() && p.Iidtipousuario != oTipoUsuarioCLS.idTipoUsuario).Count();
+                        nvecesDescription = bd.TipoUsuarios.Where(p => p.Descripcion.ToUpper().Trim() == oTipoUsuarioCLS.descripcion.ToUpper().Trim() && p.Iidtipousuario != oTipoUsuarioCLS.idTipoUsuario).Count();
+                    }
 
+
+                    if (!ModelState.IsValid || nvecesNombre >= 1 || nvecesDescription >= 1)
+                    {
+                        if (nvecesNombre >= 1)
+                        {
+                            oTipoUsuarioCLS.mensajeErrorNombre = "Nombre ya existe";
+                        }
+                        if (nvecesDescription >= 1)
+                        {
+                            oTipoUsuarioCLS.mensajeErrorDescripcion = "Descripcion ya existe";
+                        }
+
+                        return View(nombreVista, oTipoUsuarioCLS);
+                    } else {
+                        TipoUsuario oTipoUsuario = new TipoUsuario()
+                        {
                             Nombre = oTipoUsuarioCLS.nombre,
-                        Descripcion = oTipoUsuarioCLS.descripcion,
-                        Bhabilitado = 1
-                    };
+                            Descripcion = oTipoUsuarioCLS.descripcion,
+                            Bhabilitado = 1
+                        };
                         bd.TipoUsuarios.Add(oTipoUsuario);
                         bd.SaveChanges();
                     }
-                } else
-                {
-                    return View(oTipoUsuarioCLS);
                 }
-
             } catch (Exception e)
             {
-                return View(oTipoUsuarioCLS);
+                return View(nombreVista, oTipoUsuarioCLS);
             }
+
             return RedirectToAction("Index");
         }
     }

@@ -1,16 +1,21 @@
 ﻿@model MiPrimeraAplicacionEnNetCore.Clases.PaginaCLS
-@{
-    ViewData["Title"] = "Agregar";
-}
 
-<h1>Agregar Pagina</h1>
-
+<h4>Editar Pagina</h4>
+<div>
+    <a asp-action="Index">Regresar</a>
+</div>
 <hr />
 <p class="text-danger">@ViewData["ErrorMessage"]</p>
 <div class="row">
-    <div class="col-md-6">
-        <form asp-action="Agregar" asp-controller="Pagina" id="frmCreatePagina" method="post" class="row g-3">
+    <div class="col-md-4">
+        <form asp-action="Editar" class="row g-3" id="frmEditarPagina">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="idPagina" />
+            <div class="form-group">
+                <label asp-for="idPagina" class="control-label"></label>
+                <input asp-for="idPagina" class="form-control form-check" type="text" readonly />
+                <span asp-validation-for="idPagina" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="mensaje" class="control-label"></label>
                 <input asp-for="mensaje" class="form-control" />
@@ -27,8 +32,8 @@
                 <span asp-validation-for="controlador" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="button" value="Guardar" class="btn btn-primary" onclick="abrir()" />                
-                    <a asp-action="Index" class="btn btn-danger">Regresar</a>
+                <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+                <input type="button" value="Guardar" class="btn btn-primary" onclick="editarPagina()" />
             </div>
         </form>
     </div>
@@ -38,15 +43,18 @@
 <script src="~/js/generic.js"></script>
 
 <script>
-    function abrir() {
-        mostrarModal().then((result) => {
-            if (result.value) {
-                var frmCreatePagina = document.getElementById("frmCreatePagina");
-                frmCreatePagina.submit();
+    function editarPagina() {
+        mostrarModal().then(res => {
+            if (res.value) {
+                var frmEditarPagina = document.getElementById("frmEditarPagina");
+                frmEditarPagina.submit();
             }
-
         })
     }
 
 </script>
 
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
