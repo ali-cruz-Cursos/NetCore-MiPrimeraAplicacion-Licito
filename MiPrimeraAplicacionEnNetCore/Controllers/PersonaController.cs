@@ -36,6 +36,7 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
         {
             llenarSexo();
             List<PersonaCLS> listaPersona = new List<PersonaCLS>();            
+            //var listaPersona = "";
 
             using (BDHospitalContext db = new BDHospitalContext())
             {
