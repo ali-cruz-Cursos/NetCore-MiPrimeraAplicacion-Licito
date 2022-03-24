@@ -114,10 +114,28 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
                     
                     if (oEspecialidadCLS.iidEspecialidad == 0)
                     {
-                        nveces = db.Especialidad.Where(p => p.Nombre.ToUpper().Trim() == oEspecialidadCLS.nombre.ToUpper().Trim()).Count();
+                        // Agregar nuevo registro
+                        nveces = db.Especialidad
+                                    .Where(p => p.Nombre
+                                    .ToUpper()
+                                    .Trim() == oEspecialidadCLS.nombre
+                                    .ToUpper()
+                                    .Trim())
+                                    .Count();
                     } else
                     {
-                        nveces = db.Especialidad.Where(p => p.Nombre.ToUpper().Trim() == oEspecialidadCLS.nombre.ToUpper().Trim() && p.Iidespecialidad != oEspecialidadCLS.iidEspecialidad).Count();
+                        // Editar registro
+                        // Buscar las repeticiones del registro PERO descartando el ID consultado
+
+                        nveces = db.Especialidad
+                                    .Where(p => p.Nombre
+                                    .ToUpper()
+                                    .Trim() == oEspecialidadCLS.nombre
+                                    .ToUpper()
+                                    .Trim() && 
+                                    p.Iidespecialidad != oEspecialidadCLS.iidEspecialidad &&
+                                    p.Bhabilitado == 1)
+                                    .Count();
                     }
 
                      if (!ModelState.IsValid || nveces >= 1)
@@ -140,7 +158,9 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
                             db.SaveChanges();
                         } else
                         {
-                            Especialidad objeto = db.Especialidad.Where(p => p.Iidespecialidad == oEspecialidadCLS.iidEspecialidad).First();
+                            Especialidad objeto = db.Especialidad
+                                                    .Where(p => p.Iidespecialidad == oEspecialidadCLS.iidEspecialidad)
+                                                    .First();
                             objeto.Nombre = oEspecialidadCLS.nombre;
                             objeto.Descripcion = oEspecialidadCLS.descripcion;
                             db.SaveChanges();

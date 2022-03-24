@@ -50,7 +50,7 @@ namespace MiPrimeraAplicacionEnNetCore.Clases
         [Display(Name = "Email")]
         [EmailAddress(ErrorMessage = "Ingrese un email valido")]
         [Required(ErrorMessage = "Ingrese un email")]
-        public string email { get; set; }
+        public string? email { get; set; }
 
         [Display(Name = "Sexo")]
         public string nombreSexo { get; set; }

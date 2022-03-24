@@ -142,17 +142,21 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
 
             PaginaCLS oPaginaCLS = new PaginaCLS();
 
-            BDHospitalContext db = new BDHospitalContext();
+            using (BDHospitalContext db = new BDHospitalContext())
+            {
+                oPaginaCLS = (from p in db.Paginas
+                              where p.Iidpagina == id
+                              select new PaginaCLS
+                              {
+                                  idPagina = p.Iidpagina,
+                                  mensaje = p.Mensaje,
+                                  accion = p.Accion,
+                                  controlador = p.Controlador
+                              }).First();
+            }
 
-            oPaginaCLS = (from p in db.Paginas
-                          where p.Iidpagina == id
-                          select new PaginaCLS
-                          {
-                              idPagina = p.Iidpagina,
-                              mensaje = p.Mensaje,
-                              accion = p.Accion,
-                              controlador = p.Controlador
-                          }).First();
+
+
 
             if (errorEditar.GetValueOrDefault())
             {
@@ -180,12 +184,12 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
             // Instanciar contexto
             BDHospitalContext db = new BDHospitalContext();
 
-            // Validar si existen duplicados
-            if (db.Paginas.Where(p => p.Mensaje.ToUpper().Trim() == oPaginaCLS.mensaje.ToUpper().Trim() && 
-            p.Iidpagina != oPaginaCLS.idPagina).Count() >= 1)
-            {
-                existeMensaje = true;
-            }
+                // Validar si existen duplicados
+                if (db.Paginas.Where(p => p.Mensaje.ToUpper().Trim() == oPaginaCLS.mensaje.ToUpper().Trim() &&
+                p.Iidpagina != oPaginaCLS.idPagina).Count() >= 1)
+                {
+                    existeMensaje = true;
+                }
 
             // Obtener objeto pagina al que se aplicará actualizacion
             Pagina oPagina = db.Paginas.Where(p => p.Iidpagina == oPaginaCLS.idPagina).First();

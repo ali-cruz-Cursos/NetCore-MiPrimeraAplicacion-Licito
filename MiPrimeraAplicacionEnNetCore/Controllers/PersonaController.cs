@@ -29,6 +29,7 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
                              }).ToList();
                 listaSexo.Insert(0, new SelectListItem { Text = "Seleccione", Value = "" });
             }
+
             ViewBag.listaSexo = listaSexo;
         }
 
@@ -42,7 +43,7 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
             {
                 if (oPersonaCLS.iidsexo == 0 || oPersonaCLS.iidsexo == null)
                 {
-                    listaPersona = (from vPersona in db.Persona
+                    listaPersona = (from vPersona in db.Persona                                    
                                     join sexo in db.Sexo
                                     on vPersona.Iidsexo equals sexo.Iidsexo
                                     where vPersona.Bhabilitado == 1
@@ -50,8 +51,8 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
                                     {
                                         iidPersona = vPersona.Iidpersona,
                                         nombreCompleto = vPersona.Nombre + " " + vPersona.Appaterno + " " + vPersona.Apmaterno,
-                                        email = vPersona.Email,
-                                        nombreSexo = sexo.Nombre
+                                        //email = vPersona.Email,
+                                        //nombreSexo = sexo.Nombre
                                     }).ToList();
                 } else
                 {
@@ -154,24 +155,26 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
             {
                 return NotFound();
             }
-            
-            BDHospitalContext db = new BDHospitalContext();
+
             PersonaCLS oPersonaCLS = new PersonaCLS();
 
-            oPersonaCLS = (from p in db.Persona
-                           where p.Iidpersona == id
-                           select new PersonaCLS
-                           {
-                               iidPersona = p.Iidpersona,
-                               nombre = p.Nombre,
-                               aPaterno = p.Appaterno,
-                               aMaterno = p.Apmaterno,
-                               telefonoFijo = p.Telefonofijo,
-                               telefonoCelular = p.Telefonocelular,
-                               fechaNacimiento = p.Fechanacimiento,
-                               nombreSexo = p.IidsexoNavigation.Nombre,
-                               email = p.Email
-                           }).First();
+            using (BDHospitalContext db = new BDHospitalContext())
+            {
+                oPersonaCLS = (from p in db.Persona
+                               where p.Iidpersona == id
+                               select new PersonaCLS
+                               {
+                                   iidPersona = p.Iidpersona,
+                                   nombre = p.Nombre,
+                                   aPaterno = p.Appaterno,
+                                   aMaterno = p.Apmaterno,
+                                   telefonoFijo = p.Telefonofijo,
+                                   telefonoCelular = p.Telefonocelular,
+                                   fechaNacimiento = p.Fechanacimiento,
+                                   nombreSexo = p.IidsexoNavigation.Nombre,
+                                   email = p.Email
+                               }).First();
+            }
 
             if (errorPersona.GetValueOrDefault())
             {
