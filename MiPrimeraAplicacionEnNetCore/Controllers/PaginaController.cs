@@ -67,7 +67,7 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
 
 
         [HttpPost]
-        public IActionResult Elimiar(int Iidpagina)
+        public IActionResult Eliminar(int Iidpagina)
         {
             string error;
             try

@@ -38,7 +38,7 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
             llenarSexo();
             List<PersonaCLS> listaPersona = new List<PersonaCLS>();            
             //var listaPersona = "";
-
+             
             using (BDHospitalContext db = new BDHospitalContext())
             {
                 if (oPersonaCLS.iidsexo == 0 || oPersonaCLS.iidsexo == null)
@@ -51,8 +51,8 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
                                     {
                                         iidPersona = vPersona.Iidpersona,
                                         nombreCompleto = vPersona.Nombre + " " + vPersona.Appaterno + " " + vPersona.Apmaterno,
-                                        //email = vPersona.Email,
-                                        //nombreSexo = sexo.Nombre
+                                        email = vPersona == null ? "NA" : vPersona.Email,
+                                        nombreSexo = sexo == null ? "NA" : sexo.Nombre
                                     }).ToList();
                 } else
                 {
@@ -73,57 +73,47 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
             return View(listaPersona);
         }
 
-        public IActionResult Agregar()
+        public IActionResult Agregar(bool? saveChangesError = false)
         {
             llenarSexo();
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] = "Error al intentar registrar a nueva persona. Duplicado";
+            }
+
             return View();
         }
 
         [HttpPost]
         public IActionResult Guardar(PersonaCLS oPersonaCLS)
         {
-            string nombreVista = "";
-            int nveces = 0;
-
-            if (oPersonaCLS.iidPersona == 0)
-            {
-                nombreVista = "Agregar";
-            } else
-            {
-                nombreVista = "Guardar";
-            }
-
-
-            llenarSexo();
             try
             {
+                llenarSexo();
+
                 using (BDHospitalContext db = new BDHospitalContext())
                 {
-                    oPersonaCLS.nombreCompleto = oPersonaCLS.nombre.ToUpper().Trim() + " " + 
-                        oPersonaCLS.aPaterno.ToUpper().Trim() + " " + oPersonaCLS.aMaterno.ToUpper().Trim();
-
-                    if (oPersonaCLS.iidPersona == 0)
+                    if (!string.IsNullOrWhiteSpace(oPersonaCLS.nombre) ||
+                        !string.IsNullOrWhiteSpace(oPersonaCLS.aPaterno) ||
+                        !string.IsNullOrWhiteSpace(oPersonaCLS.aMaterno) ||
+                        !string.IsNullOrWhiteSpace(oPersonaCLS.email))
                     {
-                        nveces = db.Persona.Where(p => p.Nombre.ToUpper().Trim() + " " + p.Appaterno.ToUpper().Trim()
-                        + " " + p.Apmaterno.ToUpper().Trim() == oPersonaCLS.nombreCompleto).Count();
+                        oPersonaCLS.nombreCompleto = oPersonaCLS.nombre.ToUpper().Trim() + " " +
+                            oPersonaCLS.aPaterno.ToUpper().Trim() + " " + oPersonaCLS.aMaterno.ToUpper().Trim();
                     } else
                     {
-                        nveces = db.Persona.Where(p => p.Nombre.ToUpper().Trim() + " " + p.Appaterno.ToUpper().Trim()
-                        + " " + p.Apmaterno.ToUpper().Trim() == oPersonaCLS.nombreCompleto && p.Iidpersona != oPersonaCLS.iidPersona).Count();
+                        // No puedo validar campos vacios
+                        return RedirectToAction(nameof(Agregar));
                     }
 
-
-                    if (!ModelState.IsValid || nveces >= 1)
+                    if (oPersonaCLS.iidPersona != 0)
                     {
-                        if (nveces >= 1)
-                        {
-                            oPersonaCLS.mensajeError = "La persona ya existe";
-                        }
-                        return View(nombreVista, oPersonaCLS);
+                        return NotFound();
                     }
-                    else
-                    {
 
+                    if (ModelState.IsValid && !ExistUserEmail(oPersonaCLS.email, "alta", 0) && 
+                        !ExistUserName(oPersonaCLS.nombreCompleto, "alta", 0))
+                    {
                         Persona oPersona = new Persona();
 
                         oPersona.Nombre = oPersonaCLS.nombre;
@@ -137,14 +127,17 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
                         oPersona.Bhabilitado = 1;
                         db.Persona.Add(oPersona);
                         db.SaveChanges();
+                        return RedirectToAction(nameof(Index));
                     }
-                }
+                    else
+                    {
+                        return RedirectToAction(nameof(Agregar), new { saveChangesError = true });
+                    }
+                }                
             } catch (Exception e)
             {
-                return View(nombreVista, oPersonaCLS);
+                return RedirectToAction(nameof(Agregar), new { saveChangesError = true });
             }
-
-            return RedirectToAction("Index");
         }
 
 
@@ -178,7 +171,7 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
 
             if (errorPersona.GetValueOrDefault())
             {
-                ViewData["ErrorMessage"] = "Este email ya existe previamente registrado. No se permiten emails duplicados";
+                ViewData["ErrorMessage"] = "Este usuario y/o email ya existe previamente registrado. No se permiten duplicados";
             }
 
             return View(oPersonaCLS);
@@ -193,41 +186,108 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
                 return NotFound();
             }
 
-            bool existEmail = false;
-
             using(BDHospitalContext db = new BDHospitalContext()) 
             {
                 Persona oPersona = db.Persona.Where(p => p.Iidpersona == oPersonaCLS.iidPersona).First();
 
-                if (db.Persona.Where(p => p.Email.ToUpper().Trim() == oPersona.Email.ToUpper().Trim() && p.Iidpersona != oPersonaCLS.iidPersona).Count() >= 1)
+                if (oPersona != null)
                 {
-                    existEmail = true;
-                }
+                    if (!string.IsNullOrWhiteSpace(oPersonaCLS.nombre) ||
+                            !string.IsNullOrWhiteSpace(oPersonaCLS.aPaterno) ||
+                            !string.IsNullOrWhiteSpace(oPersonaCLS.aMaterno))
+                    {
+                        var nombreCompleto = oPersonaCLS.nombre.ToUpper().Trim() + " " + 
+                            oPersonaCLS.aPaterno.ToUpper().Trim() + " " + 
+                            oPersonaCLS.aMaterno.ToUpper().Trim();
 
-                try
-                {
-                    if (!existEmail)
-                    {
-                        oPersona.Nombre = oPersonaCLS.nombre;
-                        oPersona.Appaterno = oPersonaCLS.aPaterno;
-                        oPersona.Apmaterno = oPersonaCLS.aMaterno;
-                        oPersona.Telefonofijo = oPersonaCLS.telefonoFijo;
-                        oPersona.Telefonocelular = oPersonaCLS.telefonoCelular;
-                        oPersona.Fechanacimiento = oPersonaCLS.fechaNacimiento;
-                        oPersona.Email = oPersonaCLS.email;
-                        oPersona.Iidsexo = oPersonaCLS.iidsexo;
-                        oPersona.Bhabilitado = 1;
-                        db.SaveChanges();
-                        return RedirectToAction(nameof(Index));
-                    } else
-                    {
-                        return RedirectToAction(nameof(Editar), new { id = oPersonaCLS.iidPersona, errorPersona = true });
+                        try
+                        {
+
+                            if (!ExistUserName(nombreCompleto, "editar", oPersonaCLS.iidPersona) && 
+                                !ExistUserEmail(oPersonaCLS.email, "editar", oPersonaCLS.iidPersona))
+                            {
+                                oPersona.Nombre = oPersonaCLS.nombre;
+                                oPersona.Appaterno = oPersonaCLS.aPaterno;
+                                oPersona.Apmaterno = oPersonaCLS.aMaterno;
+                                oPersona.Telefonofijo = oPersonaCLS.telefonoFijo;
+                                oPersona.Telefonocelular = oPersonaCLS.telefonoCelular;
+                                oPersona.Fechanacimiento = oPersonaCLS.fechaNacimiento;
+                                oPersona.Email = oPersonaCLS.email;
+                                oPersona.Iidsexo = oPersonaCLS.nombreSexo == "MASCULINO" ? 1 : 2;
+                                oPersona.Bhabilitado = 1;
+                                db.SaveChanges();
+                                return RedirectToAction(nameof(Index));
+                            }
+                            else
+                            {
+                                return RedirectToAction(nameof(Editar), new { id = oPersonaCLS.iidPersona, 
+                                    errorPersona = true });
+                            }
+                        }
+                        catch (DbUpdateException /* e */)
+                        {
+                            return RedirectToAction(nameof(Editar), new { id = oPersonaCLS.iidPersona, 
+                                errorPersona = true });
+                        }
                     }
-                } catch (DbUpdateException /* e */)
-                {
-                    return RedirectToAction(nameof(Editar), new { id = oPersonaCLS.iidPersona, errorPersona = true });
                 }
-            }            
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        // Recibo el string del nombre de usuario completo para validar si ya existe registrado en la tabla Persona
+        public bool ExistUserName(string userName, string? tipoMovimiento, int? id)
+        {
+            using (BDHospitalContext db = new BDHospitalContext())
+            {
+                if (tipoMovimiento == "alta")
+                {
+                    if (db.Persona.Where(p => p.Nombre.ToUpper().Trim() + " " +
+                        p.Appaterno.ToUpper().Trim() + " " +
+                        p.Apmaterno.ToUpper().Trim() == userName.ToUpper().Trim()).Count() > 0)
+                    {
+                        return true;
+                    }
+                }
+                if (tipoMovimiento == "editar")
+                {
+                    if (db.Persona.Where(p => p.Nombre.ToUpper().Trim() + " " +
+                        p.Appaterno.ToUpper().Trim() + " " +
+                        p.Apmaterno.ToUpper().Trim() == userName.ToUpper().Trim() && p.Iidpersona != id).Count() > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+
+        // Recibo el string del email de usuario para validar si ya existe registrado en la tabla Persona
+        public bool ExistUserEmail(string userEmail, string? tipoMovimiento, int? id)
+        {
+            using (BDHospitalContext db = new BDHospitalContext())
+            {
+                if (tipoMovimiento == "alta")
+                {
+                    if (db.Persona.Where(p => p.Email.ToUpper().Trim() == userEmail.ToUpper().Trim()).Count() > 0)
+                    {
+                        return true;
+                    }
+                } else if (tipoMovimiento == "editar")
+                {
+                    if (db.Persona.Where(p => p.Email.ToUpper().Trim() == userEmail.ToUpper().Trim() && 
+                        p.Iidpersona != id).Count() > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }
