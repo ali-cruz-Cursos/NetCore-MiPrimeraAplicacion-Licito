@@ -163,7 +163,7 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
                                    aMaterno = p.Apmaterno,
                                    telefonoFijo = p.Telefonofijo,
                                    telefonoCelular = p.Telefonocelular,
-                                   fechaNacimiento = p.Fechanacimiento,
+                                   fechaNacimiento = p.Fechanacimiento == null ? DateTime.Now : p.Fechanacimiento,
                                    nombreSexo = p.IidsexoNavigation.Nombre,
                                    email = p.Email
                                }).First();

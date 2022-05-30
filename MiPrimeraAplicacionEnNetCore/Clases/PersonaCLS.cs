@@ -19,7 +19,7 @@ namespace MiPrimeraAplicacionEnNetCore.Clases
         [Display(Name = "Nombre")]
         [StringLength(25, MinimumLength = 3, ErrorMessage = "Ingrese entre 3 y 25 caracteres")]
         [Required(ErrorMessage = "Ingrese un nombre")]
-        public string nombre { get; set;}
+        public string nombre { get; set; }
 
         [Required(ErrorMessage = "Ingrese un paterno")]
         [Display(Name = "Paterno")]
@@ -40,7 +40,7 @@ namespace MiPrimeraAplicacionEnNetCore.Clases
         public string telefonoCelular { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name = "Fecha de nacimiento")]        
+        [Display(Name = "Fecha de nacimiento")]
         [Required(ErrorMessage = "Ingrese una fecha")]
         public DateTime? fechaNacimiento { get; set; }
 
@@ -56,6 +56,8 @@ namespace MiPrimeraAplicacionEnNetCore.Clases
         public string nombreSexo { get; set; }
 
         public string mensajeError { get; set; }
+
+        public string mensajeErrorCorreo {get; set;}
 
     } 
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "V0aMyl8AvnGryTVc8F9shZzHO39D6acmKQxEiGt0Dh1Pb/S95cJxYNEtSOM4992AOCTdAkrfh+nKUVm5GoOIag==",
+  "dgSpecHash": "JtRPJxb7XXU+EWDZYBcHdggqfS9oadvOCMWI/YMg5vkoRbcAdABJazyungOG9o8sZMoUSPD0jf9uc2jc0aOH2g==",
   "success": true,
   "projectFilePath": "C:\\Users\\userone\\Desktop\\Proyectos\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj",
   "expectedPackageFiles": [
@@ -130,7 +130,8 @@
     "C:\\Users\\userone\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\userone\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\userone\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\userone\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\userone\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\userone\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.15\\microsoft.netcore.app.host.win-x64.5.0.15.nupkg.sha512"
   ],
   "logs": []
 }

@@ -783,7 +783,6 @@ C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicac
 C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\MiPrimeraAplicacionEnNetCore.RazorAssemblyInfo.cache
 C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\MiPrimeraAplicacionEnNetCore.RazorAssemblyInfo.cs
 C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\staticwebassets\MiPrimeraAplicacionEnNetCore.StaticWebAssets.Manifest.cache
-C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\staticwebassets\MiPrimeraAplicacionEnNetCore.StaticWebAssets.xml
 C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\scopedcss\bundle\MiPrimeraAplicacionEnNetCore.styles.css
 C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\MiPrimeraAplicacionEnNetCore.TagHelpers.input.cache
 C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\MiPrimeraAplicacionEnNetCore.TagHelpers.output.cache
@@ -1296,3 +1295,4 @@ C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicac
 C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\Razor\Views\Sede\Editar.cshtml.g.cs
 C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\Razor\Views\Pagina\Editar.cshtml.g.cs
 C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\Razor\Views\Persona\Editar.cshtml.g.cs
+C:\Users\userone\Desktop\Proyectos\MiPrimeraAplicacionEnNetCore\MiPrimeraAplicacionEnNetCore\obj\Debug\net5.0\MiPrimeraAplicacionEnNetCore.csproj.AssemblyReference.cache
