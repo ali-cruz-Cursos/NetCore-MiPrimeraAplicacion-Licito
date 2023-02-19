@@ -1,15 +1,45 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using Microsoft.AspNetCore.Mvc;
 using MiPrimeraAplicacionEnNetCore.Clases;
 using MiPrimeraAplicacionEnNetCore.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace MiPrimeraAplicacionEnNetCore.Controllers
 {
-    public class SedeController : Controller
+    public class SedeController : BaseController
     {
+        public static List<SedeCLS> listaSed;
+ 
+        // Metodo para descargar el excel
+        public FileResult exportar(string[] nombrePropiedades, string tipoReporte)
+        {
+            if (tipoReporte == "Excel")
+            {
+                byte[] buffer = exportarExcelDatos(nombrePropiedades, listaSed);
+                return File(buffer, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            }
+            else if (tipoReporte == "PDF")
+            {
+                byte[] buffer = exportarPDFDatos(nombrePropiedades, listaSed);
+                return File(buffer, "application/pdf");
+            }
+
+            return null;
+
+
+        }
+
+
+
+
+
+
         public IActionResult Index(SedeCLS oSedeCLS)
         {
             List<SedeCLS> listaSede = new List<SedeCLS>();
@@ -40,6 +70,8 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
                     ViewBag.nombreSede = oSedeCLS.nombreSede;
                 }
             }
+
+            listaSed = listaSede;
             return View(listaSede);
         }
 

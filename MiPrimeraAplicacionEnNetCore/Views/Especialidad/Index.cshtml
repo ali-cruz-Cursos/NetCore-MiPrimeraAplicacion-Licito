@@ -6,29 +6,64 @@
     string mensaje = ViewBag.mensaje;
 }
 
-
-<h1>@ViewBag.mensaje</h1>
-
-<a class="btn btn-primary" asp-action="Agregar" asp-controller="Especialidad">Agregar</a>
+<center><h1>@ViewBag.mensaje</h1></center>
 
 <form asp-controller="Especialidad" asp-action="Index" method="post" class="mb-2"
       style="display: grid; grid-template-columns: 1fr 2fr 1fr 1fr" id="frmEspecialidad">
     <label>Ingrese nombre especialidad</label>
-    <input type="text" id="nombre" class="form form-control" name="nombre" value="@ViewBag.nombreEspecialidad"/>
+    <input type="text" id="nombre" class="form form-control" name="nombre" 
+           value="@ViewBag.nombreEspecialidad" />
     <input type="submit" value="Buscar" class="btn btn-info" />
     <input type="button" value="Limpiar" class="btn btn-danger" onclick="Limpiar()" />
 </form>
 
-<table class="table" id="table">
-    <thead class="thead-dark">
-        <tr>
-            <th>@Html.DisplayNameFor(model=>model.iidEspecialidad)</th>
-            <th>@Html.DisplayNameFor(model=>model.nombre)</th>
-            <th>@Html.DisplayNameFor(model=>model.descripcion)</th>
-        </tr>
-    </thead>
-    <dbody>
-        @foreach (EspecialidadCLS oEspecialidad in Model)
+<a class="btn btn-primary btn-sm" asp-action="Agregar" asp-controller="Especialidad">
+    <i class="fas fa-plus"></i>Agregar</a>
+
+<form asp-controller="Especialidad" asp-action="exportar" id="frmReporte">
+    <table class="table table-hover" id="table">
+        <thead class="thead-dark bg-dark text-white">
+            <tr class="thead-light" id="checkB">
+                <td>
+                    <input type="checkbox" name="nombrePropiedades" checked value="iidEspecialidad" />
+                </td>
+                <td>
+                    <input type="checkbox" name="nombrePropiedades" checked value="nombre" />
+                </td>
+                <td>
+                    <input type="checkbox" name="nombrePropiedades" checked value="descripcion" />
+                </td>
+                <td>
+                    <select class="dropdown-menu-dark">
+                        <option value="" disabled selected>Descargar</option>
+                        <option value="Imprimir" onclick="Imprimir()">Imprimir</option>
+                        <option value="Excel" onclick="ExportarExcel()">Excel</option>
+                        <option value="Word" onclick="ExportarWord()">Word</option>
+                        <option value="PDF" onclick="ExportarPDF('Especialidad')">PDF</option>
+                    </select>
+                </td>
+            </tr>
+            <input type="hidden" name="tipoReporte" id="tipoReporte" />
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.iidEspecialidad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.descripcion)
+                </th>
+                <th>
+                    Operaciones
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+
+
+            @foreach (EspecialidadCLS oEspecialidad in Model)
             {
                 <tr>
                     <td>@oEspecialidad.iidEspecialidad</td>
@@ -38,15 +73,17 @@
                         <i class="fa fa-trash btn btn-danger" aria-hidden="true"
                            onclick="eliminarEspecialidad(@oEspecialidad.iidEspecialidad)">
                         </i>
-                        <a class="fa fa-edit btn btn-primary" aria-hidden="true" asp-controller="Especialidad" asp-action="Editar" asp-route-id="@oEspecialidad.iidEspecialidad"/>
+                        <a class="fa fa-edit btn btn-primary" aria-hidden="true" 
+                           asp-controller="Especialidad" asp-action="Editar" 
+                           asp-route-id="@oEspecialidad.iidEspecialidad" />
 
                     </td>
                 </tr>
             }
-    </dbody>
+        </tbody>
 
-</table>
-
+    </table>
+</form>
 <form asp-action="Eliminar" asp-controller="Especialidad" method="post" id="frmEliminarEspecialidad">
     <input type="text" id="txtIdEspecialidad" name="Iidespecialidad" />
 </form>
@@ -55,13 +92,19 @@
 <script src="~/js/generic.js"></script>
 
 <script>
+    //function ExportarReporte(tipoReporte) {
+    //    if (document.getElementById(""))
+    //    console.log(document.getElementById("Excel2").innerText);
 
-    window.onload = function () {
-        $(document).ready(function () {
-            $('#table').DataTable();
-        });
+    //}
+
+    document.getElementByTagName('select')[0].onchange = function () {
+    console.log("element selected");
+    var index = this.selectedIndex;
+    var inputText = this.children[index].innerHTML.trim();
+    console.log(inputText);
+    //ExportarReporte(inputText);
     }
-
 
     function Limpiar() {
         document.getElementById("nombre").value = "";

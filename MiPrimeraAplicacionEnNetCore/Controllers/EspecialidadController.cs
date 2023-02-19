@@ -1,15 +1,52 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MiPrimeraAplicacionEnNetCore.Clases;
 using MiPrimeraAplicacionEnNetCore.Models;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
+using cm = System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using iText.Kernel.Pdf;
+using iText.Layout.Element;
+
+using iText.Layout;
+using Syncfusion.DocIO.DLS;
 
 namespace MiPrimeraAplicacionEnNetCore.Controllers
 {
-    public class EspecialidadController : Controller
+    public class EspecialidadController : BaseController
     {
+
+        public static List<EspecialidadCLS> listaEsp;
+
+        // Metodo para descargar el excel
+        public FileResult exportar(string[] nombrePropiedades, string tipoReporte)
+        {
+            //string[] cabeceras = { "Id Especialidad", "Nombre", "Descripcion" };
+            //string[] nombrePropiedades = { "iidEspecialidad", "nombre", "descripcion" };
+            if (tipoReporte == "Excel")
+            {
+                byte[] buffer = exportarExcelDatos(nombrePropiedades, listaEsp);
+                return File(buffer, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            } else if (tipoReporte == "Word")
+            {
+                byte[] buffer = exportarDatosWord(nombrePropiedades, listaEsp);
+                return File(buffer, "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+            }
+
+            return null;
+        }
+
+        public string exportarDatosPDF(string[] nombrePropiedades)
+        {
+            byte[] buffer = exportarPDFDatos(nombrePropiedades, listaEsp);
+            string cadena = Convert.ToBase64String(buffer);
+            cadena = "data:application/pdf;base64," + cadena;
+            return cadena;
+        }
+
         public IActionResult Index(EspecialidadCLS oEspecialidadCLS)
         {
             ViewBag.mensaje = "Mensaje desde el controlador hacia la vista";
@@ -44,6 +81,7 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
                     ViewBag.nombreEspecialidad = oEspecialidadCLS.nombre;
                 }
             }
+            listaEsp = listaEspecialidad;
             return View(listaEspecialidad);
         }
 

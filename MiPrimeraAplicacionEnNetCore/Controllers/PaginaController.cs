@@ -9,8 +9,33 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MiPrimeraAplicacionEnNetCore.Controllers
 {
-    public class PaginaController : Controller
+    public class PaginaController : BaseController
     {
+        public static List<PaginaCLS> listaPag;
+
+        public FileResult exportar(string[] nombrePropiedades, string tipoReporte)
+        {
+            if (tipoReporte == "Excel")
+            {
+                byte[] buffer = exportarExcelDatos(nombrePropiedades, listaPag);
+                return File(buffer, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            } else if (tipoReporte == "Word")
+            {
+                byte[] buffer = exportarDatosWord(nombrePropiedades, listaPag);
+                return File(buffer, "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+            }
+
+            return null;
+        }
+
+        public string exportarDatosPDF(string[] nombrePropiedades)
+        {
+            byte[] buffer = exportarPDFDatos(nombrePropiedades, listaPag);
+            string cadena = Convert.ToBase64String(buffer);
+            cadena = "data:application/pdf;base64," + cadena;
+            return cadena;
+        }
+
         public IActionResult Index(PaginaCLS oPaginaCLS)
         {
             List<PaginaCLS> listaPaginas = new List<PaginaCLS>();
@@ -30,39 +55,40 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
                                         accion = pagina.Accion,
                                         controlador = pagina.Controlador
                                     }).ToList();
-                    
-                
 
-                //if (oPaginaCLS.mensaje == null)
-                //{
-                //    listaPaginas = (from pagina in db.Paginas
-                //                    where pagina.Bhabilitado == 1 &&
-                //                    ((string.IsNullOrEmpty(oPaginaCLS.mensaje)) || 
-                //                    select new PaginaCLS
-                //                    {
-                //                        idPagina = pagina.Iidpagina,
-                //                        mensaje = pagina.Mensaje,
-                //                        accion = pagina.Accion,
-                //                        controlador = pagina.Controlador
-                //                    }).ToList();
-                //    ViewBag.Mensaje = "";
-                //} else
-                //{
-                //    listaPaginas = (from pagina in db.Paginas
-                //                    where pagina.Bhabilitado == 1 &&
-                //                    pagina.Mensaje.Contains(oPaginaCLS.mensaje)
-                //                    select new PaginaCLS
-                //                    {
-                //                        idPagina = pagina.Iidpagina,
-                //                        mensaje = pagina.Mensaje,
-                //                        accion = pagina.Accion,
-                //                        controlador = pagina.Controlador
-                //                    }).ToList();
-                //    ViewBag.Mensaje = oPaginaCLS.mensaje;
-                //}
+
+                if (oPaginaCLS.mensaje == null)
+                {
+                    listaPaginas = (from pagina in db.Paginas
+                                    where pagina.Bhabilitado == 1 &&
+                                    ((string.IsNullOrEmpty(oPaginaCLS.mensaje)) ||
+                                    pagina.Mensaje.Contains(oPaginaCLS.mensaje))
+                                    select new PaginaCLS
+                                    {
+                                        idPagina = pagina.Iidpagina,
+                                        mensaje = pagina.Mensaje,
+                                        accion = pagina.Accion,
+                                        controlador = pagina.Controlador
+                                    }).ToList();
+                    ViewBag.Mensaje = "";
+                }
+                else
+                {
+                    listaPaginas = (from pagina in db.Paginas
+                                    where pagina.Bhabilitado == 1 &&
+                                    pagina.Mensaje.Contains(oPaginaCLS.mensaje)
+                                    select new PaginaCLS
+                                    {
+                                        idPagina = pagina.Iidpagina,
+                                        mensaje = pagina.Mensaje,
+                                        accion = pagina.Accion,
+                                        controlador = pagina.Controlador
+                                    }).ToList();
+                    ViewBag.Mensaje = oPaginaCLS.mensaje;
+                }
             }
-
-                return View(listaPaginas);
+            listaPag = listaPaginas;
+            return View(listaPaginas);
         }
 
 
@@ -75,7 +101,8 @@ namespace MiPrimeraAplicacionEnNetCore.Controllers
                 using (BDHospitalContext db = new BDHospitalContext())
                 {
                     Pagina oPagina = db.Paginas.Where(p => p.Iidpagina == Iidpagina).First();
-                    db.Paginas.Remove(oPagina);
+                    //db.Paginas.Remove(oPagina);
+                    oPagina.Bhabilitado = 0;
                     db.SaveChanges();
                 }
             } catch (Exception e)

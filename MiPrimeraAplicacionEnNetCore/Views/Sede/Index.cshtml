@@ -9,49 +9,74 @@
 
 <form id="frmSede" asp-controller="Sede" asp-action="Index" class="mb-2" method="post">
     <label>Ingrese nombre sede</label>
-    <input type="text" class="form form-control" name="nombreSede" onkeyup="Buscar()" value="@nombreSede"/>
+    <input type="text" class="form form-control" name="nombreSede" onkeyup="Buscar()" value="@nombreSede" />
 
 </form>
 
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.iidSede)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nombreSede)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.direccion)
-            </th>
-            <th>
-                Operaciones
-            </th>
-            
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.iidSede)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombreSede)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.direccion)
-            </td>
-            <td>
-                <i class="fa fa-trash btn btn-danger" aria-hidden="true" onclick="eliminarSede(@item.iidSede)" ></i>
-                <a class="fa fa-edit btn btn-primary" aria-hidden="true" asp-controller="Sede" asp-action="Editar" asp-route-id="@item.iidSede"></a>
-            </td>
 
-        </tr>
-}
-    </tbody>
-</table>
+<form asp-controller="Sede" asp-action="exportar" id="frmReporte">
+    <table class="table" id="table">
+        <thead class="thead-dark">
+            <tr id="checkB">
+                <th>
+                    <input type="checkbox" checked name="nombrePropiedades" value="iidSede" />
+                    <input type="hidden" name="tipoReporte" id="tipoReporte" />
+                </th>
+                <th>
+                    <input type="checkbox" checked name="nombrePropiedades" value="nombreSede" />
+                </th>
+                <th>
+                    <input type="checkbox" checked name="nombrePropiedades" value="direccion" />
+                </th>
+                <td>
+                    <select class="dropdown-menu-dark">
+                        <option value="" disabled selected>Descargar</option>
+                        <option value="Imprimir" onclick="Imprimir()">Imprimir</option>
+                        <option value="Excel" onclick="ExportarExcel()">Excel</option>
+                        <option value="Word" onclick="ExportarWord()">Word</option>
+                        <option value="PDF" onclick="ExportarPDF()">PDF</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.iidSede)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.nombreSede)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.direccion)
+                </th>
+                <th>
+                    Operaciones
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.iidSede)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombreSede)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.direccion)
+                    </td>
+                    <td>
+                        <i class="fa fa-trash btn btn-danger" aria-hidden="true" onclick="eliminarSede(@item.iidSede)"></i>
+                        <a class="fa fa-edit btn btn-primary" aria-hidden="true" asp-controller="Sede" asp-action="Editar" asp-route-id="@item.iidSede"></a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
 
 <form asp-action="Eliminar" asp-controller="Sede" method="post" id="frmEliminarSede">
     <input type="hidden" name="idsede" id="txtSede" />
@@ -64,7 +89,6 @@
 <script>
     function Buscar() {
         document.getElementById("frmSede").submit();
-
     }
 
     function eliminarSede(idSede) {
@@ -75,6 +99,6 @@
                 frmEliminarSede.submit();
             }
         })
-
     }
+
 </script>

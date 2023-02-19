@@ -44,7 +44,7 @@
 
 <script>
     function editarPagina() {
-        mostrarModal().then(res => {
+        mostrarModal("Editar elemento", "Seguro que desea editar este elemento?", "Aceptar").then(res => {
             if (res.value) {
                 var frmEditarPagina = document.getElementById("frmEditarPagina");
                 frmEditarPagina.submit();

@@ -17,7 +17,7 @@
     <input type="button" class="btn btn-danger" value="Limpiar" onclick="Limpiar()" />
 </form>
 
-<table class="table">
+<table class="table" id="table">
     <thead class="thead-dark">
         <tr>
             <th>@Html.DisplayNameFor(model => model.iidPersona)</th>
@@ -50,6 +50,14 @@
 
 <script src="~/js/sweetalert2.js"></script>
 <script src="~/js/generic.js"></script>
+
+<script>
+    window.onload = function () {
+        $(document).ready(function () {
+            $('#table').DataTable();
+        });
+    }
+</script>
 
 <script>
     function Limpiar() {

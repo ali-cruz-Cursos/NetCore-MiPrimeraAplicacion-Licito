@@ -8,6 +8,7 @@
     <link href="~/css/all.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
     <link href="~/css/paginate.css" rel="stylesheet" />
+
 </head>
 <body>
     <header>
@@ -39,14 +40,14 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="TipoUsuario" asp-action="Index">Tipo Usuarios</a>
                         </li>
                         @*<li class="nav-item">
-            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="MiPagina">Mi Pagina</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-white" asp-area="" asp-controller="Pais" asp-action="Inicio">Pais Controller</a>
-        </li>*@
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="MiPagina">Mi Pagina</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Pais" asp-action="Inicio">Pais Controller</a>
+                            </li>*@
 
 
                     </ul>
@@ -65,11 +66,12 @@
             &copy; 2021 - MiPrimeraAplicacionEnNetCore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
-    <script src="~/js/paginate.js"></script>
-
-
+    <script src="~/js/paginate.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

@@ -10,39 +10,74 @@
 <a class="btn btn-primary btn-sm" asp-action="Agregar" asp-controller="Pagina"><i class="fas fa-plus"></i> Agregar Pagina</a>
 
 <form class="mb-2" id="frmPagina" asp-controller="Pagina" asp-action="Index" method="post"
-      style="display: grid; grid-template-columns: 1fr 2fr 1fr 1fr">
+      style="display: grid; grid-template-columns: 1fr 2fr 1fr 1fr 1fr">
     <label>Filtro por Mensaje</label>
     <input type="text" id="mensaje" class="form-check form-control" name="mensaje" value="@ViewBag.Mensaje" />
     <input type="submit" class="btn btn-primary" value="Buscar" />
     <input type="button" value="Limpiar" class="btn btn-danger" onclick="Limpiar()" />
 </form>
 
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.idPagina)</th>
-            <th>@Html.DisplayNameFor(model => model.mensaje)</th>
-            <th>@Html.DisplayNameFor(model => model.accion)</th>
-            <th>@Html.DisplayNameFor(model => model.controlador)</th>
-            <th>Operaciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (PaginaCLS oPaginaCLS in Model)
-        {
-            <tr>
-                <td>@oPaginaCLS.idPagina</td>
-                <td>@oPaginaCLS.mensaje</td>
-                <td>@oPaginaCLS.accion</td>
-                <td>@oPaginaCLS.controlador</td>
+<form asp-controller="Pagina" asp-action="exportar" id="frmReporte">
+    <table class="table table-hover" id="table">
+        <thead class="thead-dark bg-dark text-white">
+            <tr class="thead-light" id="checkB">
                 <td>
-                    <i class="fa fa-trash btn btn-danger" aria-hidden="true" onclick="eliminarPagina(@oPaginaCLS.idPagina)"> </i>
-                    <a asp-action="Editar" asp-controller="Pagina" asp-route-id="@oPaginaCLS.idPagina"><i class="fa fa-edit btn btn-primary" aria-hidden="true"></i></a>
+                    <input type="checkbox" name="nombrePropiedades" checked
+                           value="idPagina" />
+                </td>
+                <td>
+                    <input type="checkbox" name="nombrePropiedades" checked
+                           value="mensaje" />
+                </td>
+                <td>
+                    <input type="checkbox" name="nombrePropiedades" checked
+                           value="accion" />
+                </td>
+                <td>
+                    <input type="checkbox" name="nombrePropiedades" checked
+                           value="controlador" />
+                </td>
+                <td>
+                    <select class="dropdown-menu-dark">
+                        <option value="" disabled selected>Descargas</option>
+                        <option value="Imprimir" onclick="Imprimir()">Imprimir</option>
+                        <option value="Excel" onclick="ExportarExcel()">Excel</option>
+                        <option value="Word" onclick="ExportarWord()">Word</option>
+                        <option value="PDF" onclick="ExportarPDF('Pagina')">PDF</option>
+                    </select>
                 </td>
             </tr>
-        }
-    </tbody>
-</table>
+
+            <input type="hidden" name="tipoReporte" id="tipoReporte" />
+
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.idPagina)</th>
+                <th>@Html.DisplayNameFor(model => model.mensaje)</th>
+                <th>@Html.DisplayNameFor(model => model.accion)</th>
+                <th>@Html.DisplayNameFor(model => model.controlador)</th>
+                <th>Operaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (PaginaCLS oPaginaCLS in Model)
+            {
+                <tr>
+                    <td>@oPaginaCLS.idPagina</td>
+                    <td>@oPaginaCLS.mensaje</td>
+                    <td>@oPaginaCLS.accion</td>
+                    <td>@oPaginaCLS.controlador</td>
+                    <td>
+                        <i class="fa fa-trash btn btn-danger" aria-hidden="true" onclick="eliminarPagina(@oPaginaCLS.idPagina)">
+                        </i>
+                        <a asp-action="Editar" asp-controller="Pagina" asp-route-id="@oPaginaCLS.idPagina">
+                            <i class="fa fa-edit btn btn-primary" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
 
 <form asp-action="Eliminar" asp-controller="Pagina" method="post" id="frmEliminarPagina">
     <input type="text" id="txtIdPagina" name="Iidpagina" />
@@ -62,7 +97,7 @@
 
     function eliminarPagina(idPagina) {
         document.getElementById("txtIdPagina").value = idPagina;
-        mostrarModal().then(res => {
+        mostrarModal("Deseas eliminar este registro?", "Este registro se eliminara.", "Eliminar").then(res => {
             if (res.value) {
                 var frmEliminarPagina = document.getElementById("frmEliminarPagina");
                 frmEliminarPagina.submit();

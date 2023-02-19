@@ -16,7 +16,7 @@
     @Html.DropDownList("idFormaFarmaceutica", listaFormas, new { @class="form form-control"} )
 </form>
 
-<table class="table">
+<table class="table" id="table">
     <thead class="thead-dark">
         <tr>
             <th>@Html.DisplayNameFor(model => model.idMedicamento)</th>
@@ -49,6 +49,12 @@
 
 <script src="~/js/sweetalert2.js"></script>
 <script src="~/js/generic.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#table').DataTable();
+    });
+</script>
 
 <form asp-action="Eliminar" asp-controller="Medicamento" method="post" id="frmEliminarMedicamento">
     <input type="hidden" name="idMedicamento" id="idMedicamento" />

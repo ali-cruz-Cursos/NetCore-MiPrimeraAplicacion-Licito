@@ -1,23 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\userone\\Desktop\\Proyectos\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj": {}
+    "C:\\Users\\userone\\Desktop\\Proyectos-ali.cruz\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\userone\\Desktop\\Proyectos\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj": {
+    "C:\\Users\\userone\\Desktop\\Proyectos-ali.cruz\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\userone\\Desktop\\Proyectos\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj",
+        "projectUniqueName": "C:\\Users\\userone\\Desktop\\Proyectos-ali.cruz\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj",
         "projectName": "MiPrimeraAplicacionEnNetCore",
-        "projectPath": "C:\\Users\\userone\\Desktop\\Proyectos\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj",
+        "projectPath": "C:\\Users\\userone\\Desktop\\Proyectos-ali.cruz\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj",
         "packagesPath": "C:\\Users\\userone\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\userone\\Desktop\\Proyectos\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\obj\\",
+        "outputPath": "C:\\Users\\userone\\Desktop\\Proyectos-ali.cruz\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Program Files\\DevExpress 22.1\\Components\\Offline Packages",
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\userone\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.1.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +28,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\DevExpress 22.1\\Components\\System\\Components\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,9 +47,17 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            },
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
               "version": "[5.0.9, )"
+            },
+            "Microsoft.DotNet.PlatformAbstractions": {
+              "target": "Package",
+              "version": "[3.1.6, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
@@ -61,6 +72,14 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "Syncfusion.DocIO.Net.Core": {
+              "target": "Package",
+              "version": "[20.3.0.47, )"
+            },
+            "itext7": {
+              "target": "Package",
+              "version": "[7.1.11, )"
             }
           },
           "imports": [
