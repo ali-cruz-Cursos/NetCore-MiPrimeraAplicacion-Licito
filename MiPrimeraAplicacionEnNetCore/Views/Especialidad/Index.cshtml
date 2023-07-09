@@ -98,7 +98,7 @@
 
     //}
 
-    document.getElementByTagName('select')[0].onchange = function () {
+    document.getElementsByTagName('select')[0].onchange = function () {
     console.log("element selected");
     var index = this.selectedIndex;
     var inputText = this.children[index].innerHTML.trim();
