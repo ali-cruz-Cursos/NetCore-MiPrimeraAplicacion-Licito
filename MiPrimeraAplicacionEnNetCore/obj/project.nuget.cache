@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5x0dg7S+OOhbLNvoGNBMbH5bHHrLrNqtKAU8Tbydsm3kobZxv+DJlCVQ5fTkVtD1sXoLmrqvhEUXw+5Tf/aFBA==",
+  "dgSpecHash": "WI/layCLZ6D6lQjs9RxmHCWr5PFNFsveMQQi5+AqXupQ59gKjNuP4sWptqoMDsnKBysuyYuYAzQGaIforzRi+g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\userone\\Desktop\\Proyectos-ali.cruz\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj",
+  "projectFilePath": "C:\\Users\\userone\\Desktop\\Proyectos-ali.cruz\\NetCore-MiPrimeraAplicacion-Licito\\MiPrimeraAplicacionEnNetCore\\MiPrimeraAplicacionEnNetCore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\userone\\.nuget\\packages\\common.logging\\3.4.1\\common.logging.3.4.1.nupkg.sha512",
     "C:\\Users\\userone\\.nuget\\packages\\common.logging.core\\3.4.1\\common.logging.core.3.4.1.nupkg.sha512",
